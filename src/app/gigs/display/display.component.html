@@ -121,7 +121,7 @@
 											class="size-font">{{gigsProfileInfo.producerInfo?.fullName}}</span>
 									</div>
 									<bar-rating [(rate)]="rate" [max]="5" (rateChange)="addRating()"
-										[readOnly]="isproducer"></bar-rating>
+										[readOnly]="!isproducer"></bar-rating>
 
 								</div>
 							</ion-item>
