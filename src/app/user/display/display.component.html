@@ -1,7 +1,7 @@
 <app-back-header></app-back-header>
 <ion-content>
 	<div *ngIf="userProfileInfo">
-		<div><img class="w-100" height="250px" [src]="userProfileInfo.profileImage">
+		<div><img class="profileimg" [src]="userProfileInfo.profileImage">
 			<ion-row style="margin-top: 5px;">
 				<ion-col size="2">
 					<a *ngIf="userProfileInfo.email" href="mailto:{{userProfileInfo.email}}" target="_top" class="p-3"

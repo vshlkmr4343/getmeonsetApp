@@ -25,7 +25,7 @@
     <ion-row style="width: 100%" class="shadow-sm">
       <ion-col size="6" class="profilecol" *ngFor="let listItem of listDetails | paginate: config; let i = index">
         <div class="profile">
-          <img [src]="listItem.profileImage" style="width:180px; height:180px; padding:3px" alt="...">
+          <img [src]="listItem.profileImage" class="profileimg"  alt="...">
           <div class="border-right">
             <ion-card-header style="height: 115px !important;" [routerLink]="['/user/display', listItem.usersId,userType]">
               <ion-card-title  class="size-font"
