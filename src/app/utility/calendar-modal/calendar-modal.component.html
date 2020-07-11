@@ -1,0 +1,17 @@
+
+<ion-content >
+	<ion-item lines="none">
+		<ion-buttons slot="start">
+			<ion-button (click)="close()">
+				<ion-icon name="close"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-button slot="end"  color="primary" (click)="apply()" style="border-radius: 0;text-transform: none;">
+			Apply
+		</ion-button>
+	</ion-item>
+	<div class="col-sm-8 col-lg-4">
+		<ion-calendar [options]="optionsRange" [type]="type" [format]="'YYYY-MM-DD'" [(ngModel)]="dateRange">
+		</ion-calendar>
+	</div>
+</ion-content>

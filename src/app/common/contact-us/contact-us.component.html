@@ -1,0 +1,56 @@
+<app-header></app-header>
+
+<ion-content style="--background: #F5F5F5;">
+  <div class="container">
+  <div>
+    <p class="heading">Contact Us</p>
+  </div>
+ <ion-card>
+  <form [formGroup]="contactusForm" (submit)="onSubmit()">
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Name *</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" class="form-control input-tag size-font" id="" value="" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Email *</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" class="form-control input-tag size-font" id="" value=""  formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.pattern">Enter a valid email</div>
+      </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Phone *</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="number" class="form-control input-tag size-font" id="" value="" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+          <div *ngIf="f.phone.errors.required">Phone number is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Message *</label>
+      <div class="col-sm-8 col-lg-4">
+        <textarea class="form-control rounded-0 size-font" id="exampleFormControlTextarea2" rows="2" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }"></textarea>
+        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+          <div *ngIf="f.message.errors.required">Message is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+      <button id="contact-submit" type="submit" class="btn btn-primary shadow-sm">SUBMIT</button>
+      </div>
+    </div>
+    </form>
+    <div class="mt-3 text-muted size-font">* marked fields are mandatory</div>
+ </ion-card>
+  </div>
+</ion-content>

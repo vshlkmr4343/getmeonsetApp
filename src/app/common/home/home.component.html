@@ -1,0 +1,23 @@
+<div class="bottomImage">
+	<div class="login-image">
+		<img src="../../../assets/images/login_logo.png">
+	</div>
+	<div class="login-btn">
+		<div>
+			<ion-button id="btn" expand="full" (click)="browse('Talent')">BROWSE AS ACTOR</ion-button>
+		</div>
+		<div>
+			<ion-button id="btn" expand="full" (click)="browse('Crew')">BROWSE AS CREW</ion-button>
+		</div>
+		<div>
+			<ion-button id="btn" expand="full" [routerLink]="['/user/list/producer']">BROWSE AS PRODUCER</ion-button>
+		</div>
+	</div>
+	<div style="position: absolute; background-color: transparent; bottom: 0px; width: 100%">
+		<div class="row">
+			<button id="footer-btn1" class="col col-50 button button-block" [routerLink]="['/sign-in']">SIGN IN</button>
+			<button id="footer-btn2" class="col col-50 button button-block" [routerLink]="['/sign-up']">JOIN FOR
+				FREE</button>
+		</div>
+	</div>
+</div>

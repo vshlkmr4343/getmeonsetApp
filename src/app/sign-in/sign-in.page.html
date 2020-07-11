@@ -1,0 +1,38 @@
+<app-header title="'signIn'"></app-header>
+<ion-content>
+  <div>
+    <div class="modal-header text-center d-block border-0">
+      <h5 class="modal-title w-100">Sign In</h5>
+      <div class="w-100 text-muted">Instruction goes here</div>
+    </div>
+    <div class="modal-body p-4">
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+          <label for="" class="size-font">Email</label>
+          <input type="email" class="form-control size-font" id=""
+            [ngClass]="{'invalidEntry': submitted && f.email.errors}" formControlName="email" placeholder="Enter email">
+        </div>
+        <div *ngIf="submitted && f.email.errors" class="form-group">
+          <div *ngIf="f.email.errors.required" class="text-danger">Email is required</div>
+          <div *ngIf="f.email.errors.pattern"  class="text-danger">Enter a valid email</div>
+        </div>
+        <div class="form-group">
+          <label for="" class="size-font">Password</label>
+          <input type="password" class="form-control size-font"
+            [ngClass]="{'invalidEntry': submitted && f.password.errors}" formControlName="password"
+            placeholder="Password">
+        </div>
+        <div *ngIf="submitted && f.password.errors" class="form-group">
+          <div *ngIf="f.password.errors.required"  class="text-danger">Password is required</div>
+          <div *ngIf="f.password.errors.minlength" class="text-danger">Password must be at least 6 characters</div>
+      </div>
+        <div class="mb-3"><span [routerLink]="['/user/forgot-password']" class="size-font">Forgot Password?</span>
+        </div>
+        <button class="btn btn-primary btn-block shadow-sm" (click)="onLogin()">SIGN IN</button>
+      </form>
+    </div>
+    <div class="modal-footer border-0 bg-light px-3"> <span class="align-middle mr-auto size-font">Do not have an
+        account?</span><span class="btn btn-danger shadow-sm shadow-sm" [routerLink]="['/sign-up']">JOIN FOR FREE</span>
+    </div>
+  </div>
+</ion-content>

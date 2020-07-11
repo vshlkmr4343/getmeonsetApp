@@ -1,0 +1,262 @@
+<ion-content>
+  <div class="flex-shrink-0 ">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="card shadow-sm">
+          <form [formGroup]="searchForm" (submit)="onSearch()">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Age</label>
+                <div class="input-group">
+                  <select class="form-control" formControlName="minAge">
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                  </select>
+                  <select class="form-control ml-2" formControlName="maxAge">
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                    <option value="60">60</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Radius</label>
+                <select class="form-control" formControlName="radius">
+                  <option value="0,5">0 to 5 miles</option>
+                  <option value="6,20">6 to 20 miles</option>
+                  <option value="21,50">21 to 50 miles</option>
+                  <option value="51,100">51 to 100 miles</option>
+                  <option value="101">100+ miles</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Gender</label>
+                <div class="row">
+                  <div class="col-6" *ngFor="let data of genderArray">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [(ngModel)]="data.selected"
+                        [ngModelOptions]="{standalone: true}" (change)="selectGenderData($event)">
+                      <label class="form-check-label" for="defaultCheck1">
+                        {{data.label}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Equipment Rentals</label>
+                <div class="row">
+                  <div class="col-12" *ngFor="let data of equipmentRentalArray">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [(ngModel)]="data.selected"
+                        [ngModelOptions]="{standalone: true}" (change)="selectEquimentRendalData($event)">
+                      <label class="form-check-label" for="defaultCheck1">
+                        {{data.label}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Accounting / Payroll </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="accounting" id="inlineRadio3"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio3">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="accounting"
+                        id="inlineRadio4" value="0">
+                      <label class="form-check-label" for="inlineRadio4">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Audio / Sound </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="audio" id="inlineRadio13"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio13">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="audio"
+                        id="inlineRadio14" value="0">
+                      <label class="form-check-label" for="inlineRadio14">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Catering </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="catering" id="inlineRadio15"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio15">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="catering"
+                        id="inlineRadio16" value="0">
+                      <label class="form-check-label" for="inlineRadio16">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Distribution </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="distribution"
+                        id="inlineRadio17" value="1">
+                      <label class="form-check-label" for="inlineRadio17">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="distribution"
+                        id="inlineRadio18" value="0">
+                      <label class="form-check-label" for="inlineRadio18">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Insurance </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="insurance" id="inlineRadio19"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio19">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="insurance"
+                        id="inlineRadio20" value="0">
+                      <label class="form-check-label" for="inlineRadio20">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Legal </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="legal" id="inlineRadio21"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio21">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="legal"
+                        id="inlineRadio22" value="0">
+                      <label class="form-check-label" for="inlineRadio22">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Post Production </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="postProduction"
+                        id="inlineRadio23" value="1">
+                      <label class="form-check-label" for="inlineRadio23">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="postProduction"
+                        id="inlineRadio24" value="0">
+                      <label class="form-check-label" for="inlineRadio24">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Props Rental & Supplies </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="propsRental"
+                        id="inlineRadio25" value="1">
+                      <label class="form-check-label" for="inlineRadio25">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="propsRental"
+                        id="inlineRadio26" value="0">
+                      <label class="form-check-label" for="inlineRadio26">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Security </label>
+                <div class="row">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="security" id="inlineRadio27"
+                        value="1">
+                      <label class="form-check-label" for="inlineRadio27">Yes</label>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input class="form-check-input" checked type="radio" formControlName="security"
+                        id="inlineRadio28" value="0">
+                      <label class="form-check-label" for="inlineRadio28">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="d-flex text-right w-100 py-3 px-2 " style="align-items: center;background: #999999">
+    <button class="btn btn-primary shadow-sm" style="color:black !important; background: #ffffff;border:#ffffff"
+      (click)="close()">CLOSE</button>
+    <a href="javascript:void(0);" class="ml-auto mr-2" style="color: white;" (click)="clear()">Clear Filter</a>
+    <button type="submit" class="btn btn-primary shadow-sm" (click)="onSearch()">SEARCH</button>
+  </div>
+</ion-footer>

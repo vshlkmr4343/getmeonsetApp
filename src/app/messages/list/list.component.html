@@ -1,0 +1,97 @@
+<app-header></app-header>
+<ion-content style="--background: #F5F5F5 !important;">
+  <ion-item lines="full" class="fixed-heading">
+    <ion-row style="width: 100%;">
+      <ion-col size="5" (click)="highlight('Gig','usersId','module')" [ngClass]="{'highlightGig': isHighlited=='Gig'}"
+        class="selectedGig">
+        <span style="font-size: 14px;">Gig Messages</span>
+      </ion-col>
+      <ion-col size="5" (click)="highlight('User','usersId','module')" [ngClass]="{'highlightGig': isHighlited=='User'}"
+        class="selectedGig">
+        <span style="font-size: 14px;">User Messages</span>
+      </ion-col>
+      <ion-col size="2">
+      </ion-col>
+    </ion-row>
+  </ion-item>
+
+  <div style="margin-top: 50px;">
+    <!-- <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown button
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div> -->
+    <div *ngIf="messageData.moduleId == '2'">
+      <div style="padding-left: 10px; padding-right: 10px;">
+        <ion-select ok-text="Okay" cancel-text="Cancel" placeholder="Choose Your message"
+          (ionChange)="getGigMessageUsers($event.detail.value)" [(ngModel)]="gigUserDetail">
+          <ion-select-option *ngFor="let gigUsers of gigUserDetails;let i = index;"  value="{{gigUsers.gigId}}">
+            {{gigUsers.title}}</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+    <div *ngIf="messageData.moduleId">
+      <ion-item lines="none" *ngFor="let list of messageLists;let i = index;"
+        style="--background: #F5F5F5 !important; margin-left: -12px;" >
+        <ion-row style="width: 100%;">
+          <ion-col size="2">
+            <ion-avatar class="avatar-image1" *ngIf="list.userDetails.usersId != usersId">
+              <ion-img src="{{list.userDetails.profileImage}}" alt="">
+              </ion-img>
+            </ion-avatar>
+            <ion-avatar class="avatar-image1" *ngIf="list.receiverDetails.usersId != usersId">
+              <ion-img src="{{list.receiverDetails.profileImage}}" alt="">
+              </ion-img>
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="5" [routerLink]="['/messages/'+list.userDetails.usersId+'/chat/'+list.receiverDetails.usersId,list.messageId]">
+            <!-- <a class="text-dark" href="javascript:void(0)" (click)="getMessageDetails(list.userDetails.usersId, list.receiverDetails.usersId, list.messageId)"> -->
+            <ion-label class="msg-label">
+              <h3 class="sender-name">{{list.messageSubject}}</h3>
+              <p class="size-font"> {{list.massageText}}</p>
+            </ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-label>
+              <p class="time">{{list.massageTime}}</p>
+            </ion-label>
+          </ion-col>
+          <ion-col size="1">
+            <!-- <ion-badge class="badge" color="medium">11</ion-badge> -->
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+    <!-- <ion-card>
+    <ion-item lines="none" style="--background: #F8F9FA !important; margin-left: -12px;"  class="shadow-sm">
+      <ion-row style="width: 100%;margin-top: -5px;">
+        <ion-col size="2">
+      <ion-avatar class="avatar-image2">
+        <ion-img src="../../assets/images/talent1.png" alt="">
+        </ion-img>
+      </ion-avatar>
+      </ion-col>
+      <ion-col size="5">
+      <ion-label>
+        <h3 class="sender-name">Olivia Smith</h3>
+        <p class="size-font">Last Messages here</p>
+      </ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label>
+          <p class="time">02:00 AM,03/10/20</p>
+        </ion-label>
+        </ion-col>
+      <ion-col size="1">
+        <ion-badge color="medium" class="badge">11</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    </ion-card> -->
+  </div>
+</ion-content>

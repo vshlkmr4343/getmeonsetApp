@@ -1,0 +1,82 @@
+<ion-app>
+	<ion-split-pane contentId="main-content">
+		<ion-menu contentId="main-content" type="overlay">
+			<app-side-menu-header (onCheckLoggedIn)="check($event)"></app-side-menu-header>
+			<ion-content>
+				<ion-list *ngIf="!isSubmenuOpen" id="inbox-list">
+					<ion-menu-toggle auto-hide="false">
+						<div *ngIf="isLoggedIn" class="gigPost" (click)="post()">
+							<ion-icon name="add" color="light"></ion-icon>
+							<ion-label color="light">POST A GIG</ion-label>
+						</div>
+					</ion-menu-toggle>
+					<ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+						<ion-item *ngIf="p.title == 'FORUM' || p.title == 'GEAR RENTAL' || p.title == 'CLSSIFIEDS'"
+							(click)="openUrl(p.title)" class="bottomBorder">
+							<ion-icon slot="end" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" color="light">
+							</ion-icon>
+							<ion-label color="light" *ngIf="p.title == 'FORUM'"><a style="color:#f4f5f8"
+									href="https://yapbuzz.com/works/gmos/forum/viewforum.php?f=6">{{p.title}}</a>
+							</ion-label>
+							<ion-label color="light" *ngIf="p.title == 'GEAR RENTAL'"><a style="color:#f4f5f8"
+									href="https://yapbuzz.com/works/gmos/forum/viewforum.php?f=7">{{p.title}}</a>
+							</ion-label>
+							<ion-label color="light" *ngIf="p.title == 'CLSSIFIEDS'"><a style="color:#f4f5f8"
+									href="https://yapbuzz.com/works/gmos/forum/viewforum.php?f=5">{{p.title}}</a>
+							</ion-label>
+						</ion-item>
+						<ion-item
+							*ngIf="p.title != 'FORUM' && p.title != 'GEAR RENTAL' && p.title != 'CLSSIFIEDS' && p.title != 'MESSAGES' && p.title != 'NOTIFICATIONS' && p.title != 'MY PROFILE' && p.title != 'MORE'"
+							(click)="selectedIndex = i" lines="none" routerDirection="root" [routerLink]="[p.url]"
+							detail="false" [class.selected]="selectedIndex == i" class="bottomBorder">
+							<ion-icon slot="end" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" color="light">
+							</ion-icon>
+							<ion-label color="light">{{p.title}}</ion-label>
+						</ion-item>
+					</ion-menu-toggle>
+				    <ion-menu-toggle auto-hide="false">
+						<ion-item *ngIf="isLoggedIn && userDetails" (click)="selectedIndex = i" lines="none"
+						routerLink="/messages/{{usersId}}" detail="false"
+						[class.selected]="selectedIndex == i" class="bottomBorder">
+						<ion-badge slot="end" color="medium">11</ion-badge>
+						<ion-label color="light">MESSAGES</ion-label>
+					</ion-item>
+					<ion-item *ngIf="isLoggedIn && userDetails" (click)="selectedIndex = i" lines="none" routerLink="/notifications"
+						detail="false" [class.selected]="selectedIndex == i" class="bottomBorder">
+						<ion-badge slot="end" color="medium">11</ion-badge>
+						<ion-label color="light">NOTIFICATIONS</ion-label>
+					</ion-item>
+					</ion-menu-toggle>
+					<ion-item *ngIf="isLoggedIn" (click)="open('MY PROFILE')" lines="none" detail="false"
+						class="bottomBorder">
+						<ion-label color="light">MY PROFILE</ion-label>
+						<ion-icon name="arrow-forward" slot="end" color="light"></ion-icon>
+					</ion-item>
+					<ion-item (click)="open('MORE')" lines="none" detail="false" class="bottomBorder">
+						<ion-label color="light">MORE</ion-label>
+						<ion-icon name="arrow-forward" slot="end" color="light"></ion-icon>
+					</ion-item>
+				</ion-list>
+				<ion-list *ngIf="isSubmenuOpen" id="inbox-list">
+					<ion-item class="bottomBorder" (click)="back()">
+						<ion-icon name="arrow-back" color="light"></ion-icon>
+						<ion-label color="light" style="padding-left:5px">BACK</ion-label>
+					</ion-item>
+
+					<ion-menu-toggle auto-hide="false" *ngFor="let s of subMenuPages; let j = index"
+						[routerLink]="[s.url]">
+						<ion-item lines="none" detail="false" [class.selected]="selectedIndex == j"
+							class="bottomBorder">
+							<ion-icon slot="end" [ios]="s.icon + '-outline'" [md]="s.icon + '-sharp'" color="light">
+							</ion-icon>
+							<ion-label color="light" *ngIf="s.title !='LOG OUT'">{{s.title}}</ion-label>
+							<ion-label color="light" *ngIf="s.title =='LOG OUT'" (click)="logout()">{{s.title}}
+							</ion-label>
+						</ion-item>
+					</ion-menu-toggle>
+				</ion-list>
+			</ion-content>
+		</ion-menu>
+		<ion-router-outlet id="main-content"></ion-router-outlet>
+	</ion-split-pane>
+</ion-app>

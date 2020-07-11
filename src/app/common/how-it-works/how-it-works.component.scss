@@ -1,0 +1,50 @@
+.heading{
+    margin-top: 60px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+    font-size: 15px;
+    margin-right: auto;
+   
+}
+.details-text{
+    font-size: 14px;
+    line-height: normal;
+}
+.details-question{
+    font-size: 14px;
+    line-height: normal;
+    font-weight: bold;
+}
+
+
+.fixed-heading{
+    --background: #DDDDDD !important;
+    width: 100%;
+    z-index: 999;
+    // padding-top: 11px;
+    // padding-bottom: 11px;
+    // margin-top: -12px;
+    // padding-left: 0px;
+    // padding-right: 0px;
+  }
+
+  .selected{
+
+    border-bottom: 3px solid #C1270B;
+  }
+
+
+  .actor {
+    text-align: center;
+   margin-top: 14px;
+  }
+
+  .highlightArtist{
+    border-bottom:  3px solid #C1270B;
+}
+.selectedArtist{
+    text-align: center;
+    padding-top: 20px;
+    padding-right: 0px;
+    padding-left: 0px;
+  }

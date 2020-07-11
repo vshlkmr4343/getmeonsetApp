@@ -1,0 +1,62 @@
+<app-header></app-header>
+<ion-content>
+  <ion-item style="width: 100%;" class="fixed-heading">
+    <ion-row style="width: 100%;">
+      <ion-col size="3"  class="selectedArtist" [routerLink]="['/user/talent']">
+        <span>Actor</span>
+      </ion-col>
+      <ion-col size="2"  class="selectedArtist " [routerLink]="['/user']">
+        <span>Crew</span>
+      </ion-col>
+      <ion-col size="4" class="selectedArtist" [routerLink]="['/user/producer']">
+        <span>Producer</span>
+      </ion-col>
+      <ion-col size="3" class="selectedArtist highlightArtist">
+        <span>Vendor</span>
+      </ion-col>
+    </ion-row>
+    <ion-button size="small" id="filterBtn" (click)="search()">Filter</ion-button>
+  </ion-item>
+
+  <div style="margin-top: 55px;">
+  
+    <ion-row style="width: 100%" class="shadow-sm">
+      <ion-col size="6" class="profilecol" *ngFor="let vendors of vendorDetails | paginate: config; let i = index">
+        <div class="profile" [routerLink]="['/user/vendor/display', vendors.usersId]">
+          <img [src]="vendors.profileImage" style="width:180px; height:180px ; padding: 3px;" alt="...">
+          <div class="border-right">
+            <ion-card-header>
+              <ion-card-title class="size-font" *ngIf="vendors.fullName">{{vendors.fullName}} </ion-card-title>
+              <bar-rating [(rate)]="vendors.usersRating" [max]="5"></bar-rating>
+            </ion-card-header>
+            <ion-card-content style="height: 78px !important;">
+              <p class="size-font" *ngIf="vendors.usersAddress.length">
+                {{vendors.usersAddress[0].fullAddress}}
+              </p>
+              <!-- <span class="size-font" *ngIf="vendors.gender  && vendors.height && vendors.weight">
+                {{switchResult(vendors.gender)}} , {{vendors.heightInFeet}}, {{vendors.weight}} lb
+              </span> -->
+            </ion-card-content>
+            <ion-row></ion-row>
+            <ion-row style="width: 100%;background: #F8F9FA !important;" class="mt-2 mb-0">
+              <ion-col size="1"></ion-col>
+              <ion-col size="3">
+                <a *ngIf="vendors.email" href="mailto:{{vendors.email}}" target="_top" class="p-2" data-toggle="tooltip"
+                  data-placement="top" title="Email now"><i class="fas fa-envelope fa-lg text-secondary"></i></a>
+              </ion-col>
+              <ion-col size="1"></ion-col>
+              <ion-col size="3">
+                <a *ngIf="vendors.phone" href="tel:{{vendors.phone}}" class="p-2" data-toggle="tooltip"
+                  data-placement="top" title="Call now"><i class="fas fa-phone   fa-rotate-90 text-secondary"></i></a>
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div style="padding-top: 12px; padding-bottom: 0;">
+    <pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
+    </pagination-controls>
+  </div>
+</ion-content>

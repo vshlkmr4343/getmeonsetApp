@@ -1,0 +1,185 @@
+.head-text {
+    margin-top: 5px;
+    margin-bottom: auto;
+    font-size: 15px;
+    margin-left: -5px;
+    margin-right: auto;
+  }
+  .fixed-heading{
+    --background: #F5F5F5 !important;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    margin-top: -12px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  #removeBtn{
+    height: 22px;
+    font-size: 10px;
+    text-transform: none;
+    border-radius: 2px !important;
+    background: #C1270B !important;
+    color: white;
+    width: 100%;
+  }
+  #filterBtn{
+    height: 22px;
+    font-size: 10px;
+    text-transform: none;
+    border-radius: 2px !important;
+    background: #C1270B !important;
+    color: white;
+    width: 100%;
+  }
+  ion-card-title{
+      font-size: 12px;
+      font-weight: bold;;
+  }
+  p{
+    font-size: 12px;
+  }
+  .profile{
+    margin-left: -16px;
+    padding: 0px;
+    margin-right: -15px;
+    margin-bottom: -37px;
+  }
+  .icon{
+      width: 25px;
+  }
+  .actor-card{
+    border-radius: 0px;
+    height: calc(100% - 40px);
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid #F0F0F0;
+    margin-top: 65px;
+    margin-bottom: -12px;
+  }
+  .actor-image{
+    width: 100%;
+    height: auto;
+  }
+  .actor-row{
+    width: 100%;
+    margin-top: -24px;
+    margin-bottom: 20px;
+  }
+  .card-details{
+    margin-left: 0;
+    margin-right: 30px;
+    margin-top: -5px;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+
+  /* Customize the label (the container) */
+.check {
+    display: block;
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    color: black;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 14px;
+    width: 14px;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .check:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .check input:checked ~ .checkmark {
+    background-color: #012E4D;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .check input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .check .checkmark:after {
+    left: 5px;
+    top: 3px;
+    width: 5px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .box-title{
+    margin-top: 0;
+    margin-bottom: 0rem;
+    font-weight: bold;
+   
+  }
+  .box-heading{
+    margin-top: 0px;
+    margin-bottom: 0rem;
+  }
+  .box{
+    overflow-y: scroll;
+    margin-top: 50px;
+    margin-right: 4px;
+    margin-left: 4px;
+   
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+ 
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+   
+  }
+   
+ 
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  
+ 
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

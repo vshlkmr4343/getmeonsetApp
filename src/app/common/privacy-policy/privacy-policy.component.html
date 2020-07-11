@@ -1,0 +1,13 @@
+<app-header></app-header>
+
+<ion-content  style="--background: #F5F5F5 !important;">
+  <div class="container">
+  <div>
+    <p class="heading">{{pageContent.pageName}}</p>
+  </div>
+  <div>
+    <p [innerHTML]="pageContent.pageContent">
+    </p>
+  </div>
+  </div>
+</ion-content>

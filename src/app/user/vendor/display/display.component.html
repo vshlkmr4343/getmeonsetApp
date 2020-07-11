@@ -1,0 +1,71 @@
+<app-back-header></app-back-header>
+<ion-content>
+  <div *ngIf="vendorProfileInfo">
+    <div><img class="w-100" height="250px" [src]="vendorProfileInfo.profileImage">
+      <ion-row style="margin-top: 5px;">
+        <ion-col size="2">
+          <a *ngIf="vendorProfileInfo.email" href="mailto:{{vendorProfileInfo.email}}" target="_top" class="p-3"
+            data-toggle="tooltip" data-placement="top" title="" data-original-title="Email now"><i
+              class="fas fa-envelope fa-1x text-secondary"></i></a>
+        </ion-col>
+        <ion-col size="2">
+          <a *ngIf="vendorProfileInfo.phone" href="tel:{{vendorProfileInfo.phone}}" class="p-3" data-toggle="tooltip"
+            data-placement="top" title="Call now"><i class="fas fa-phone   fa-rotate-90 text-secondary"></i></a>
+        </ion-col>
+        <ion-col size="2">
+          <span class="p-3" data-toggle="tooltip" data-placement="top" title="" data-original-title="Share profile"
+            (click)="share()"><i class="fas fa-share-alt fa-1x text-secondary"></i></span>
+        </ion-col>
+        <ion-col size="2">
+          <span class="p-3" [routerLink]="['/messages', vendorProfileInfo.usersId]" *ngIf="loggedInUsersId"
+            data-toggle="tooltip" data-placement="top" title="" data-original-title="Message now"><i
+              class="fas fa-comments fa-1x text-secondary"></i></span>
+        </ion-col>
+        <ion-col size="2">
+        </ion-col>
+        <ion-col size="2">
+          <a href="javascript:void(0)" class="ml-auto p-3" data-toggle="tooltip" data-placement="top"
+            [title]="vendorProfileInfo.isFavourite == 1 ? 'Remove from favorite' : 'Add to favorite'"
+            (click)="addToFavorite(vendorProfileInfo, loggedInUsersId)"><i class="fa-heart"
+              [ngClass]="vendorProfileInfo.isFavourite == 1 ? 'fas text-danger' : 'far text-secondary'"></i></a>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div style="padding: 3px">
+      <div class="col-lg-12">
+        <h5 class="card-title">{{vendorProfileInfo.fullName}}, {{vendorProfileInfo.age}}</h5>
+        <span class="size-font">{{vendorProfileInfo.usersAddress[0].fullAddress}}</span>
+        <div>
+          <span class="size-font">{{vendorProfileInfo.gender | gendertype}},
+            {{vendorProfileInfo.heightInFeet}}, {{vendorProfileInfo.weight}} lb,
+            {{vendorProfileInfo.race}}</span>
+        </div>
+        <div>
+          <span class="size-font">Joined on {{vendorProfileInfo.registerDateTime}}</span>
+        </div>
+        <br>
+        <span class="size-font">
+          {{vendorProfileInfo.usersBio}}
+        </span>
+      </div>
+      <div class="col-lg-12 mt-4">
+        <h5 class="card-title">Photos/Videos</h5>
+        <ion-row>
+          <ion-col size="3" *ngFor="let usersImages of usersImagesDetails; let i = index">
+            <img height="60px" [src]="usersImages.image">
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="col-lg-12 mt-4">
+        <h5 class="card-title">Rating & Reviews</h5>
+        <div class="mb-3" *ngFor="let reviews of reviewDetails; let i = index">
+          <small class="bg-success text-light rounded-sm p-1">{{reviews.ratingVal}} <i
+              class="fas fa-star ml-1"></i></small>
+          <strong class="ml-2 size-font"><span>{{reviews.ratingByInfo.fullName}}</span>,
+            Plainfield,{{reviews.createdAt * 1000 | date:'dd/MM/yyyy'}}</strong><br>
+          <span class="size-font">{{reviews.ratingText}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

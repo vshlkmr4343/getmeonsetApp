@@ -1,0 +1,7 @@
+{
+  "name": "gmos",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

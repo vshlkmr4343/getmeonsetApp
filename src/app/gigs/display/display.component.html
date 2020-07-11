@@ -1,0 +1,216 @@
+<app-back-header></app-back-header>
+<ion-content>
+	<div>
+		<ion-item class="fixed-heading" *ngIf="gigsProfileInfo" lines="none">
+			<ion-row style="width: 100%;">
+				<ion-col size="5">
+					<div class="card-title bold-font  " style="margin-bottom: 0px;">{{gigsProfileInfo.title}}</div>
+				</ion-col>
+				<ion-col size="2">
+					<span *ngIf="isLoggedIn" (click)="favorite()">
+						<i *ngIf="!isFavorite" class="far fa-heart fa-1x ml-3  text-secondary"></i>
+						<i *ngIf="isFavorite" class="fas fa-heart fa-1x ml-3  text-danger"></i>
+					</span>
+				</ion-col>
+				<ion-col size="2" (click)="share()">
+					<span>
+						<i class="fas fa-share-alt fa-1x ml-3 text-secondary"></i>
+					</span>
+				</ion-col>
+				<ion-col *ngIf="isProducer" size="2" [routerLink]="['/gigs/'+typeName+'/edit', gigId, gigsType]">
+					<span>
+						<i class="fas fa-edit  text-secondary"></i>
+					</span>
+				</ion-col>
+			</ion-row>
+		</ion-item>
+		<div>
+			<div class="card-body" style="background: #f5f5f5;">
+				<div class="row">
+					<div class="col-lg-6 size-font" *ngIf="gigsProfileInfo">
+						Gig Type: {{typeName}}
+						<div *ngIf="gigsProfileInfo.type">Type: {{gigsProfileInfo.type}}</div>
+						<div *ngIf="gigsProfileInfo.location.formattedAddressCustom">Location of shoot: {{gigsProfileInfo.location.formattedAddressCustom}}</div>
+						<div>Production Dates: {{gigsProfileInfo.startDate}} - {{gigsProfileInfo.endDate}}</div>
+						<div *ngIf="gigsProfileInfo.length">Length : {{gigsProfileInfo.length}}</div>
+						<div *ngIf="gigsProfileInfo.union">Union: {{gigsProfileInfo.union}}</div>
+						<div *ngIf="gigsProfileInfo.payment">Payment : {{gigsProfileInfo.payment}}</div>
+						<div *ngIf="gigsProfileInfo.totalNumberProductionDays">Total number of production days : {{gigsProfileInfo.totalNumberProductionDays}}
+						</div>
+						<div *ngIf="gigsProfileInfo.workingDays">Working days : {{gigsProfileInfo.workingDays}}</div>
+						<div *ngIf="gigsProfileInfo.rentalKitAvailable">Kit rentals available : {{gigsProfileInfo.rentalKitAvailable}}
+						</div>
+						<div *ngIf="gigsProfileInfo.lodgingProvide">Lodging Provided?: {{gigsProfileInfo.lodgingProvide}}</div>
+						<div *ngIf="gigsProfileInfo.perDimeProvided">Per diem Provided?: {{gigsProfileInfo.perDimeProvided}}</div>
+						<div *ngIf="gigsProfileInfo.travelProvided">Travel Provided?: {{gigsProfileInfo.travelProvided}}</div>
+						<div *ngIf="gigsProfileInfo.howMuch">How much : {{gigsProfileInfo.howMuch}}</div>
+					</div>
+					<div class="col-lg-3" *ngIf="gigsProfileInfo?.castingRoles">
+						<p class="bold-font" style="margin-top: 12px;margin-bottom: 12px;">Role(s)</p>
+						<div style="border: 1px solid lightgrey"
+							*ngFor="let castingRole of gigsProfileInfo.castingRoles ; let i = index">
+							<div class="col-lg-6 size-font" *ngIf="castingRole">
+								<ion-item lines="none" style="--background: #f5f5f5; padding:0">
+									<ion-label class="size-font">{{castingRole.title}}</ion-label>
+									<ion-icon name="chevron-down-outline" slot="end" (click)="viewRole(i,castingRole)" color="primary"></ion-icon>
+								</ion-item>
+								<ion-item lines="none" style="--background: #f5f5f5; padding:0" *ngIf="i == showRoleIndex">
+									<div class="size-font">
+										Gender: {{castingRole.gender | gendertype:castingRole.gender}}<br>
+										Race: {{castingRole.race | titlecase}}<br>
+										Physical cahracteristics:
+										{{castingRole.physicalCharacteristics | titlecase}}<br>
+										Age: {{castingRole.ageRange}} Year<br>
+										Day rate for each role: {{castingRole.dayRatePerRole}} Year<br>
+										Number of days needed(approx.): {{castingRole.numberOfDaysNeeded}}<br>
+										Rehearsal days: {{castingRole.rehearsalDays}}<br>
+										Rehearsal payment:
+										{{castingRole.rehearsalPayment | reharsalpayment:castingRole.rehearsalPayment}}<br>
+										Nudity required:
+										{{castingRole.isNudityRequired | isnudity:castingRole.isNudityRequired}}<br>
+									</div>
+								</ion-item>
+							</div>
+						</div>
+					</div>
+					<div *ngIf="gigsProfileInfo?.producerInfo" class="col-lg-3">
+						<p class="bold-font" style="margin-top: 12px;">Contact</p>
+						<p class="size-font"><i class="fas fa-envelope mr-2"></i> <a
+								href="mailto:{{gigsProfileInfo.producerInfo?.email}}"
+								class="size-font">{{gigsProfileInfo.producerInfo?.email}}</a></p>
+						<p class="size-font"><i class="fas fa-mobile-alt mr-2"></i><a
+								href="tel:{{gigsProfileInfo.producerInfo?.phone | phone }}"
+								class="size-font">{{gigsProfileInfo.producerInfo?.phone | phone }}</a></p>
+						<div *ngIf="socialMediaLinksDetails.length > 0">
+							<p *ngFor="let socialMediaLinks of socialMediaLinksDetails; let i = index" class="d-flex">
+								<i class="fab fa-facebook mr-2"></i> <a target="_blank"
+									style="max-width: calc(100% - 14px);"
+									href="{{gigsProfileInfo.producerInfo.socialMediaLink}}">{{socialMediaLinks.socialMediaLink}}</a>
+							</p>
+						</div>
+						<p *ngIf="gigsProfileInfo.producerInfo?.websiteLink"> <i
+								class="fas fa-globe-americas mr-2"></i><a target="_blank"
+								href="{{gigsProfileInfo.producerInfo.websiteLink}}">{{gigsProfileInfo.producerInfo.websiteLink}}</a>
+						</p>
+					</div>
+					<div class="col-lg-3">
+						<p class="bold-font">Producer</p>
+						<div class="card shadow-sm" *ngIf="gigsProfileInfo?.producerInfo">
+							<ion-item>
+								<ion-thumbnail slot="start">
+									<img src="{{gigsProfileInfo.producerInfo?.profileImage}}" class="card-img-left"
+										alt="...">
+								</ion-thumbnail>
+								<div>
+									<div><span style="font-weight: bold;"
+											class="size-font">{{gigsProfileInfo.producerInfo?.fullName}}</span>
+									</div>
+									<bar-rating [(rate)]="rate" [max]="5" (rateChange)="addRating()"></bar-rating>
+									
+								</div>
+							</ion-item>
+							<div *ngIf="isRatingVerify" style="padding: 10px;">
+								<form [formGroup]="reviewGigForm" (submit)="addRatingAndReview()">
+									<div>
+										<textarea class="form-control" [ngClass]="{ 'inValid': reviewFormSubmitted && r.usersRatingText.errors}"
+											 formControlName="usersRatingText"></textarea>
+										<!-- <input [(ngModel)]="lastIdRating" type="hidden"> -->
+										<div *ngIf="reviewFormSubmitted && r.usersRatingText.errors">
+											<ion-label color="danger"> Review is required.</ion-label>
+										</div>
+									</div>
+									<div class="mt-2">
+										<textarea class="form-control" placeholder="How do you know this person?"
+											[ngClass]="{ 'inValid': reviewFormSubmitted && r.usersRatingReasonText.errors}"  formControlName="usersRatingReasonText"></textarea>
+										<div *ngIf="reviewFormSubmitted && r.usersRatingReasonText.errors">
+											<ion-label color="danger">Review reason is required.</ion-label>
+										</div>
+									</div>
+									<div class="mt-2">
+										<ion-button (click)="addRatingAndReview()">SUBMIT</ion-button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div *ngIf="isLoggedIn && gigsProfileInfo?.isApplied == 1" class="alert alert-warning" role="alert">
+							Already applied, waiting for gig owner response.
+						</div>
+						<div *ngIf="isLoggedIn && gigsProfileInfo?.isApplied == 2" class="alert alert-success" role="alert">
+							Accepted by gig owner.
+						</div>
+						<div *ngIf="isLoggedIn && gigsProfileInfo?.isApplied == 3" class="alert alert-danger" role="alert">
+							Decliened by gig owner.
+						</div>
+						<div class="form-group " *ngIf="!isProducer">
+							<div *ngIf="isLoggedIn && gigsProfileInfo?.isApplied == 0">
+								<div class="form-group bold-font">
+									<form [formGroup]="applyGigForm" (submit)="applyGig()">
+										<label for="exampleInputEmail1">Your message</label>
+										<textarea formControlName="description" [(ngModel)]="description"
+											class="form-control"></textarea>
+									</form>
+								</div>
+								<div class="form-group" *ngIf="submitted && f.description.errors">
+									<div *ngIf="f.description.errors.required">
+										<ion-note color="danger">Message required</ion-note>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary shadow-sm mb-3" (click)="applyGig()">APPLY
+									FOR THIS GIG</button>
+							</div>
+						</div>
+						<div *ngIf="!isLoggedIn">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Your message</label>
+								<textarea class="form-control" name="gigDescription"
+									[(ngModel)]="gigDescription"></textarea>
+							</div>
+							<ion-button color="primary" [routerLink]="['/sign-in']" style="--border-radius:0">APPLY FOR
+								THIS GIG</ion-button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12" *ngIf="isLoggedIn && isProducer && gigsProfileInfo.applications.length > 0">
+				<div class="py-3 bold-font">Applications</div>
+				<div class="row py-2 border-bottom"
+					*ngFor="let gigData of gigsProfileInfo.applications; let i = index;">
+					<div class="col-lg-8">
+						<div class="media">
+							<img src="{{gigData.userInfo.profileImage}}" class="mr-3 rounded-circle"
+								style="width: 50px; height: 50px; object-fit: cover;" alt="...">
+							<div class="media-body">
+								<ion-row>
+									<ion-col>
+										<ion-label class="size-font"
+											[routerLink]="['/messages/gigchat', gigData.userInfo.usersId, gigId]">
+											{{gigData.userInfo?.fullName}}</ion-label>&nbsp;<i
+											class="fas fa-comments fa-lg text-secondary"></i>
+									</ion-col>
+								</ion-row>
+								<div class="size-font">{{gigData.description}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 text-right" *ngIf="gigData.status == 1">
+						<button class="btn btn-danger btn-sm ml-1 shadow-sm"
+							(click)="applicationAcceptDecline('Do you want to Decline this user ?',gigData.userInfo.usersId,'decline',i,'Gig Decline')">DECLINE</button>
+						<button class="btn btn-success btn-sm ml-1 shadow-sm"
+							(click)="applicationAcceptDecline('Do you want to Accept this user ?',gigData.userInfo.usersId,'accept',i,'Gig Accept')">ACCEPT</button>
+					</div>
+					<div class="col-lg-4 text-right" *ngIf="gigData.status == 2">
+						<span class="alert alert-success float-right p-1 size">ACCEPTED</span>
+					</div>
+					<div class="col-lg-4 text-right" *ngIf="gigData.status == 3">
+						<span class="alert alert-danger float-right p-1 size">DECLINED</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 mt-3" *ngIf="isLoggedIn && isProducer && gigsProfileInfo.applications.length == 0">
+				<div class="alert alert-danger" role="alert">
+					No one applied yet.
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>

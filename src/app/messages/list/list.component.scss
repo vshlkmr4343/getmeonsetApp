@@ -1,0 +1,96 @@
+a:link, a:visited {
+    color: #919294;
+    text-decoration: none;
+  }
+  
+  a:link:active, a:visited:active {
+    color: black;
+  }
+  .actor {
+    text-align: center;
+    margin-bottom: -14px;
+    margin-top: 2px;
+    font-size: 14px;
+    margin-left: -15px;
+    margin-right: auto;
+  }
+  .fixed-heading{
+    --background: #DDDDDD !important;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    margin-top: -12px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .selected{
+    border-bottom: 2px solid #C1270B;
+  }
+  .sender-name{
+    color: #77B7F0;
+    font-weight: bold;
+    //margin-top: 5px;
+    padding-top: 8px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+  .avatar-image1{
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: auto;
+    margin-left: 10px;
+ }
+ .avatar-image2{
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: auto;
+    margin-left: -3px;
+    margin-right: auto;
+ }
+ .msg-label{
+     margin-left: 10px;
+ }
+ .number{
+    padding: 0px;
+    border: 1px solid;
+    background: #999999;
+    border: none;
+    margin-top: 16px;
+    margin-bottom: auto;
+    margin-right: 4px;
+    margin-left: 4px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+ }
+ ion-card{
+  border-radius: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+ }
+ .time{
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 8px;
+  font-size: 10px;
+}
+.badge{
+  margin-top: 10px;
+  font-size: 10px;
+}
+.selectedGig{
+  margin: auto;
+  text-align: center;
+  
+}
+
+.highlightGig{
+  border-bottom:  3px solid #C1270B;
+  margin-bottom: -3px;
+  margin-top: 5px;
+}

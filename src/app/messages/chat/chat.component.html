@@ -1,0 +1,69 @@
+<app-back-header></app-back-header>
+<ion-content style="position: relative;">
+  <ion-list style="height: 80%;overflow: scroll;" >
+    <ion-item lines="none" class="item">
+      <ion-row style="width: 100%;">
+        <ion-col size="2">
+          <ion-avatar class="avatar-image1">
+            <ion-img src="{{activeReceiverArray.profileImage}}" alt="">
+            </ion-img>
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="10" >
+          <ion-label class="msg-label">
+            <div *ngIf="activeReceiverArray !=''">
+              <h3 class="sender-name"
+                *ngIf="(activeReceiverArray.usersTypeId.length > 1 || activeReceiverArray.usersTypeId.length == 1) && activeReceiverArray.usersTypeId.indexOf('3') != -1 "
+                [routerLink]="['/user/display',activeReceiverArray.usersId]">
+                {{activeReceiverArray.fullName}}</h3>
+              <h3 class="sender-name"
+                *ngIf="activeReceiverArray.usersTypeId.length == 1 && activeReceiverArray.usersTypeId.indexOf('4') != -1 "
+                [routerLink]="['/user/display',activeReceiverArray.usersId]">
+                {{activeReceiverArray.fullName}}</h3>
+              <h3 class="sender-name" *ngIf="activeReceiverArray.usersTypeId.length == 0"
+                [routerLink]="['/user/display',activeReceiverArray.usersId]">
+                {{activeReceiverArray.fullName}}</h3>
+            </div>
+         <div >
+            <ion-list  #content>
+              <ion-item lines="none" *ngFor="let message of messageUserDetails;let i = index ;">
+                <div class="mb-2" [ngClass]="{'bg-light p-2 rounded': usersId == message.userDetails.usersId}">
+                  <p class="size-font">{{message.massageTime}}
+                    <!-- {{last ? callFunction(): ''}} -->
+                  </p>
+                  <p class="size-font"> {{message.massageText}}</p>
+                </div>
+              </ion-item>
+            </ion-list>
+          </div> 
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <div class="bottom-div">
+    <form [formGroup]="replyMsgForm" (submit)="saveRelyMessage()">
+      <div class="msg-div">
+        <textarea class="msg-area" formControlName="replyMsg"
+          [ngClass]="{ 'is-invalid': replySubmitted && o.replyMsg.errors}"></textarea>
+        <div *ngIf="replySubmitted && o.replyMsg.errors" class="invalid-feedback">
+          <div *ngIf="o.replyMsg.errors.required"> Required</div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <ion-row style="width:100%">
+        <ion-col size="5" style="padding-left: 0px;">
+          <ion-button class="btn" fill="outline" (click)="report()" color="dark">
+            Report to admin
+          </ion-button>
+        </ion-col>
+        <ion-col size="4"></ion-col>
+        <ion-col size="3" style="text-align: end; padding-right: 0px;">
+          <ion-button class="send-btn" (click)="saveRelyMessage()">SEND
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

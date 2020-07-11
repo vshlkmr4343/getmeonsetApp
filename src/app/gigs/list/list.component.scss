@@ -1,0 +1,108 @@
+a:link, a:visited {
+    color: #919294;
+    text-decoration: none;
+  }
+  
+  a:link:active, a:visited:active {
+    color: black;
+  }
+  .actor {
+    border-bottom: 2px solid #C1270B;
+   text-align: center;
+   margin-bottom: -3px;
+   margin-top: auto;
+  }
+  .fixed-heading{
+    --background: #DDDDDD !important;
+    width: 100%;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    margin-top: -12px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  
+
+  #filterBtn{
+    height: 20px;
+    font-size: 10px;
+    text-transform: none;
+    --border-radius: 0px !important;
+    --background: #C1270B !important;
+  }
+  .box-heading{
+   
+    margin-top: 0px;
+    margin-bottom: 0rem;
+  }
+  .box{
+    overflow-y: scroll;
+    margin-top: 50px;
+    margin-right: 4px;
+    margin-left: 4px;
+   
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+ 
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+   
+  }
+   
+ 
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  
+ 
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+ 
+  .box-title{
+    margin-top: 0;
+    margin-bottom: 0rem;
+    font-weight: bold;
+   
+  }
+  .item-native{
+    padding-left: 10px !important;
+    padding-bottom: 3px !important;
+  }
+  .box-content{
+    padding-bottom: 0px;
+    padding-left: 0px;
+  }
+
+  .selectedGig{
+    margin: auto;
+    text-align: center;
+    
+  }
+
+  .highlightGig{
+    border-bottom:  3px solid #C1270B;
+    margin-bottom: -3px;
+    margin-top: 5px;
+  }
+
+  // .my-pagination /deep/ .ngx-pagination .current {
+  //   background: red;
+  // }
+  
+
+ .my-pagination.ngx-pagination a li{
+      color: red !important;
+  }
+  .ngx-pagination{
+    margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
+  }

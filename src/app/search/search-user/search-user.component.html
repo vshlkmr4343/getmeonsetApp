@@ -1,0 +1,372 @@
+<ion-content >
+ <div class="container">
+  <div class="card">
+    <form [formGroup]="searchForm" (submit)="onSearch()">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font">Talent Name</label>
+        <div class="input-group">
+          <input type="text" class="form-control size-font" placeholder="Talent Name" formControlName="fullName">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font">Height</label>
+        <div class="input-group">
+          <select class="form-control size-font"  formControlName="minHeight">
+            <option value="36">3'</option>
+            <option value="37">3'1"</option>
+            <option value="38">3'2"</option>
+            <option value="39">3'3"</option>
+            <option value="40">3'4"</option>
+            <option value="41">3'5"</option>
+            <option value="42">3'6"</option>
+            <option value="43">3'7"</option>
+            <option value="44">3'8"</option>
+            <option value="45">3'9"</option>
+            <option value="46">3'10"</option>
+            <option value="47">3'11"</option>
+            <option value="48">4'</option>
+            <option value="49">4'1"</option>
+            <option value="50">4'2"</option>
+            <option value="51">4'3"</option>
+            <option value="52">4'4"</option>
+            <option value="53">4'5"</option>
+            <option value="54">4'6"</option>
+            <option value="55">4'7"</option>
+            <option value="56">4'8"</option>
+            <option value="57">4'9"</option>
+            <option value="58">4'10"</option>
+            <option value="59">4'11"</option>
+            <option value="60">5'</option>
+            <option value="61">5'1"</option>
+            <option value="62">5'2"</option>
+            <option value="63">5'3"</option>
+            <option value="64">5'4"</option>
+            <option value="65">5'5"</option>
+            <option value="66">5'6"</option>
+            <option value="67">5'7"</option>
+            <option value="68">5'8"</option>
+            <option value="69">5'9"</option>
+            <option value="70">5'10"</option>
+            <option value="71">5'11"</option>
+            <option value="72">6'</option>
+            <option value="73">6'1"</option>
+            <option value="74">6'2"</option>
+            <option value="75">6'3"</option>
+            <option value="76">6'4"</option>
+            <option value="77">6'5"</option>
+            <option value="78">6'6"</option>
+            <option value="79">6'7"</option>
+            <option value="80">6'8"</option>
+            <option value="81">6'9"</option>
+            <option value="82">6'10"</option>
+            <option value="83">6'11"</option>
+          </select>
+          <select class="form-control ml-2 size-font" formControlName="maxHeight">
+            <option value="37">3'1"</option>
+            <option value="38">3'2"</option>
+            <option value="39">3'3"</option>
+            <option value="40">3'4"</option>
+            <option value="41">3'5"</option>
+            <option value="42">3'6"</option>
+            <option value="43">3'7"</option>
+            <option value="44">3'8"</option>
+            <option value="45">3'9"</option>
+            <option value="46">3'10"</option>
+            <option value="47">3'11"</option>
+            <option value="48">4'</option>
+            <option value="49">4'1"</option>
+            <option value="50">4'2"</option>
+            <option value="51">4'3"</option>
+            <option value="52">4'4"</option>
+            <option value="53">4'5"</option>
+            <option value="54">4'6"</option>
+            <option value="55">4'7"</option>
+            <option value="56">4'8"</option>
+            <option value="57">4'9"</option>
+            <option value="58">4'10"</option>
+            <option value="59">4'11"</option>
+            <option value="60">5'</option>
+            <option value="61">5'1"</option>
+            <option value="62">5'2"</option>
+            <option value="63">5'3"</option>
+            <option value="64">5'4"</option>
+            <option value="65">5'5"</option>
+            <option value="66">5'6"</option>
+            <option value="67">5'7"</option>
+            <option value="68">5'8"</option>
+            <option value="69">5'9"</option>
+            <option value="70">5'10"</option>
+            <option value="71">5'11"</option>
+            <option value="72">6'</option>
+            <option value="73">6'1"</option>
+            <option value="74">6'2"</option>
+            <option value="75">6'3"</option>
+            <option value="76">6'4"</option>
+            <option value="77">6'5"</option>
+            <option value="78">6'6"</option>
+            <option value="79">6'7"</option>
+            <option value="80">6'8"</option>
+            <option value="81">6'9"</option>
+            <option value="82">6'10"</option>
+            <option value="82">6'11"</option>
+            <option value="84">7'</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font" >Weight</label>
+        <div class="input-group">
+          <select class="form-control size-font" formControlName="minWeight">
+            <option value="40">40 lb</option>
+            <option value="45">45 lb</option>
+            <option value="50">50 lb</option>
+            <option value="55">55 lb</option>
+            <option value="60">60 lb</option>
+            <option value="65">65 lb</option>
+            <option value="70">70 lb</option>
+            <option value="75">75 lb</option>
+            <option value="80">80 lb</option>
+            <option value="85">85 lb</option>
+            <option value="90">90 lb</option>
+            <option value="95">95 lb</option>
+            <option value="100">100 lb</option>
+            <option value="105">105 lb</option>
+            <option value="110">110 lb</option>
+            <option value="115">115 lb</option>
+            <option value="120">120 lb</option>
+            <option value="125">125 lb</option>
+            <option value="130">130 lb</option>
+            <option value="135">135 lb</option>
+            <option value="140">140 lb</option>
+            <option value="145">145 lb</option>
+            <option value="150">150 lb</option>
+            <option value="155">155 lb</option>
+            <option value="160">160 lb</option>
+            <option value="165">165 lb</option>
+            <option value="170">170 lb</option>
+            <option value="175">175 lb</option>
+            <option value="180">180 lb</option>
+            <option value="185">185 lb</option>
+            <option value="190">190 lb</option>
+            <option value="195">195 lb</option>
+            <option value="200">200 lb</option>
+            <option value="205">205 lb</option>
+            <option value="210">210 lb</option>
+            <option value="215">215 lb</option>
+            <option value="220">220 lb</option>
+            <option value="225">225 lb</option>
+            <option value="230">230 lb</option>
+            <option value="235">235 lb</option>
+            <option value="240">240 lb</option>
+            <option value="245">245 lb</option>
+            <option value="250">250 lb</option>
+            <option value="255">255 lb</option>
+            <option value="260">260 lb</option>
+            <option value="265">265 lb</option>
+            <option value="270">270 lb</option>
+            <option value="275">275 lb</option>
+            <option value="280">280 lb</option>
+            <option value="285">285 lb</option>
+            <option value="290">290 lb</option>
+            <option value="295">295 lb</option>
+          </select>
+          <select class="form-control ml-2 size-font" formControlName="maxWeight">
+            <option value="45">45 lb</option>
+            <option value="50">50 lb</option>
+            <option value="55">55 lb</option>
+            <option value="60">60 lb</option>
+            <option value="65">65 lb</option>
+            <option value="70">70 lb</option>
+            <option value="75">75 lb</option>
+            <option value="80">80 lb</option>
+            <option value="85">85 lb</option>
+            <option value="90">90 lb</option>
+            <option value="95">95 lb</option>
+            <option value="100">100 lb</option>
+            <option value="105">105 lb</option>
+            <option value="110">110 lb</option>
+            <option value="115">115 lb</option>
+            <option value="120">120 lb</option>
+            <option value="125">125 lb</option>
+            <option value="130">130 lb</option>
+            <option value="135">135 lb</option>
+            <option value="140">140 lb</option>
+            <option value="145">145 lb</option>
+            <option value="150">150 lb</option>
+            <option value="155">155 lb</option>
+            <option value="160">160 lb</option>
+            <option value="165">165 lb</option>
+            <option value="170">170 lb</option>
+            <option value="175">175 lb</option>
+            <option value="180">180 lb</option>
+            <option value="185">185 lb</option>
+            <option value="190">190 lb</option>
+            <option value="195">195 lb</option>
+            <option value="200">200 lb</option>
+            <option value="205">205 lb</option>
+            <option value="210">210 lb</option>
+            <option value="215">215 lb</option>
+            <option value="220">220 lb</option>
+            <option value="225">225 lb</option>
+            <option value="230">230 lb</option>
+            <option value="235">235 lb</option>
+            <option value="240">240 lb</option>
+            <option value="245">245 lb</option>
+            <option value="250">250 lb</option>
+            <option value="255">255 lb</option>
+            <option value="260">260 lb</option>
+            <option value="265">265 lb</option>
+            <option value="270">270 lb</option>
+            <option value="275">275 lb</option>
+            <option value="280">280 lb</option>
+            <option value="285">285 lb</option>
+            <option value="290">290 lb</option>
+            <option value="295">295 lb</option>
+            <option value="300">300 lb</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font">Age</label>
+        <div class="input-group">
+          <select class="form-control size-font" formControlName="minAge">
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+          </select>
+          <select class="form-control ml-2" formControlName="maxAge">
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+            <option value="60">60</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font">Gender</label>
+        <div class="row">
+          <div class="col-6"  *ngFor="let data of genderArray">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio1" [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"  (change) ="selectGenderData($event)">
+              <label class="form-check-label" for="defaultCheck1">
+                {{data.label}}
+              </label>
+            </div>
+          </div>
+          <!-- <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio2" value="0">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio2">Male</label>
+            </div>
+          </div> -->
+        </div>
+        <!-- <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio1" value="1">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio1">Female</label>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font">Hair Color</label>
+        <div class="row">
+          <div class="col-6"  *ngFor="let data of hairColorArray">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio1" [(ngModel)]="data.selected" type="checkbox" [ngModelOptions]="{standalone: true}"  (change) ="selectHairData($event)">
+              <label class="form-check-label" for="defaultCheck3">
+                {{data.label}}
+              </label>
+            </div>
+          </div>
+          <!-- <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio2" value="0">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio2">Blonde</label>
+            </div>
+          </div> -->
+        </div>
+        <!-- <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio1" value="1">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio1">Brown</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio2" value="0">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio2">Grey</label>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="checkbox" id="inlineRadio1" value="1">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio1">Red</label>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font">Tattoos</label>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="radio" id="inlineRadio1" value="1">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio1">Yes</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="radio" id="inlineRadio2" value="0">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio2">No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="size-font">Piercings</label>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="radio" id="inlineRadio1" value="1">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio1">Yes</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-check">
+              <input class="form-check-input pt-1" type="radio" id="inlineRadio2" value="0">
+              <label class="form-check-label size-font pt-1 pl-1" for="inlineRadio2">No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+ </div>
+
+</ion-content>
+
+<ion-footer>
+  <div class="d-flex text-right w-100 py-3 px-2 " style="align-items: center;background: #999999">
+    <button class="btn btn-primary shadow-sm" style="color:black !important; background: #ffffff;border:#ffffff"
+      (click)="close()">CLOSE</button>
+    <a href="javascript:void(0);" class="ml-auto mr-2" style="color: white;" (click)="clear()">Clear Filter</a>
+    <button type="submit" class="btn btn-primary shadow-sm" (click)="onSearch()">SEARCH</button>
+  </div>
+</ion-footer>
+

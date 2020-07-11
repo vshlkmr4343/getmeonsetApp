@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<ion-content style="--background: #F5F5F5 !important;">
+
+  <div style="position: fixed; width: 100%;background: #F5F5F5">
+   
+    <ion-item lines="full" class="fixed-heading">
+      <ion-row style="width: 100%;" >
+        <ion-col size="4" class="selectedArtist" (click)="select('talent')"  [ngClass]="{'highlightArtist': userType=='talent'}">
+          <span>Actor</span>
+        </ion-col>
+        <ion-col size="4" class="selectedArtist" (click)="select('crew')" [ngClass]="{'highlightArtist': userType=='crew'}">
+          <span>Crew</span>
+        </ion-col>
+        <ion-col size="4" class="selectedArtist" (click)="select('producer')" [ngClass]="{'highlightArtist': userType=='producer'}">
+          <span>Producer</span>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </div>
+ 
+  <div class="container">
+    <div>
+      <p class="heading">{{pageContent.pageName}}</p>
+    </div>
+    <div class="">
+      <p [innerHTML]="pageContent.pageContent">
+      </p>
+    </div>
+  </div>
+</ion-content>

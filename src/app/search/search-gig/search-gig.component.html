@@ -1,0 +1,105 @@
+<ion-content style="--background: #F5F5F5;">
+  <div class="container">
+   <form [formGroup]="searchForm" (submit)="onSearch()">
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Gig Title</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" class="form-control"  placeholder="Gig Title" formControlName="fullName" >      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Gig Type</label>
+      <div class="col-sm-8 col-lg-4">
+        <select class="form-control" formControlName="gigType" [(ngModel)]="gigType" (change)="checkType($event)">
+          <option value="0">Any</option>
+          <option value="1">Crew Gig</option>
+          <option value="2">Talent Gig/Casting Calls</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Gig Union</label>
+      <div class="col-sm-8 col-lg-4">
+        <select class="form-control" formControlName="gigUnion">
+          <option value="2">Any</option>
+          <option value="1">Union</option>
+          <option value="0">Non union</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Gig Payment</label>
+      <div class="col-sm-8 col-lg-4">
+        <select class="form-control" formControlName="gigPayment">
+          <option value="2">Any</option>
+          <option value="1">Paid</option>
+          <option value="0">Unpaid</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Radius</label>
+      <div class="col-sm-8 col-lg-4">
+        <select class="form-control" formControlName="radius">
+          <option value="0,5">0 to 5 miles</option>
+          <option value="6,20">6 to 20 miles</option>
+          <option value="21,50">21 to 50 miles</option>
+          <option value="51,100">51 to 100 miles</option>
+          <option value="101" >100+ miles</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">City/State</label>
+      <div class="col-sm-8 col-lg-4">
+        <input type="text" class="form-control"  placeholder="City/State" formControlName="cityState" >
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-8 col-lg-4">
+        <div class="form-check">
+          <input type="checkbox" [checked]="isTalent" class="form-check-input" id="exampleCheck1" (change)="toggleIsTalent($event)">
+          <label class="form-check-label pt-1" for="exampleCheck1 size-font" >Talent Gig</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="isTalent">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Race</label>
+      <div class="col-sm-8 col-lg-4">
+        <select class="form-control" formControlName="race" >
+          <option _ngcontent-c8="" value="" ng-reflect-value="">Select</option>
+          <option *ngFor="let race of raceArray;" [value]="race">{{race}} </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="isTalent">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right size-font">Physical Characteristics</label>
+      <div class="col-sm-8 col-lg-4">
+        <select class="form-control" formControlName="physicalCharacteristics" >
+          <option _ngcontent-c8="" value="" ng-reflect-value="">Select</option>
+        <option *ngFor="let physicalCharacteristics of physicalCharacteristicsArray;" [value]="physicalCharacteristics">{{physicalCharacteristics}} </option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pb-0 size-font">Position Available</label>
+      <div class="col-sm-8 col-lg-4" *ngFor="let data of jobInterestedInArray">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"  (change) ="selectJobInterestedInData($event)">
+          <label class="form-check-label positions-font-size" for="defaultCheck1">
+            {{data.label}}
+          </label>
+        </div>
+    </div>
+    </div>
+   </form>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="d-flex text-right w-100 py-3 px-2 " style="align-items: center;background: #999999">
+  <button class="btn btn-primary shadow-sm" style="color:black !important; background: #ffffff;border:#ffffff"
+    (click)="close()">CLOSE</button>
+  <a href="javascript:void(0);" class="ml-auto mr-2" (click)="reset()" style="color: white;">Clear Filter</a>
+  <button type="submit" class="btn btn-primary shadow-sm" (click)="onSearch()">SEARCH</button>
+</div>
+</ion-footer>

@@ -1,0 +1,40 @@
+<app-header></app-header>
+<ion-content style="--background: #F5F5F5 !important;">
+	<ion-item lines="full"  class="fixed-heading">
+		<ion-row style="width: 100%;">
+			<ion-col size="3" style="padding-top: 10px; padding-bottom: 0px;">
+				<span>My Gig</span>
+			</ion-col>
+			<ion-col size="3">
+			</ion-col>
+			<ion-col size="4">
+			</ion-col>
+			<ion-col size="2">
+				<ion-button size="small" id="filterBtn" (click)="filter()">Filter</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-item>
+
+	<div style="margin-top: 55px;" >
+	<ion-row style="width: 100%" class="shadow-sm" >
+		<ion-col size="6" class="profilecol" *ngFor="let gig of myGigsArray  | paginate: config; let i = index">
+			<div class="profile" [routerLink]="['/gigs/type/display', gig.gigId, gig.gigType]">
+				<div class="border-right"  >
+					<ion-card-header>
+						<ion-card-title class="size-font">{{gig.title}}</ion-card-title>
+					</ion-card-header>
+					<ion-card-content >
+						<p class="size-font">
+							{{gig.location.formattedAddressCustom}}
+						</p>
+					</ion-card-content>
+					<ion-row></ion-row>
+				</div>
+			</div>
+		</ion-col>
+	</ion-row>
+	</div>
+	<div style="padding-top: 12px; padding-bottom: 0;"><pagination-controls class="ngx-pagination"
+		(pageChange)="pageChange($event)">
+	</pagination-controls></div>
+</ion-content>

@@ -1,0 +1,39 @@
+@import '../../../assets/css/main-theme.css';
+@import '../../../assets/css/main-theme.css';
+.bottomImage{
+    height: 100%;
+    width: 100%;
+    // margin-top: -77px !important;
+    background: url(../../../assets/images/home_bg.png) 0 0/100% 100% no-repeat #212121;
+    
+}
+.login-image{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 70px;
+    text-align: center;
+}
+#btn{
+    --background: #C1270B !important;
+    margin-top: 10px;
+    font-size: 12px;
+}
+.login-btn{
+    margin-top: 150px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+#footer-btn1 {
+    background: #C1270B !important;
+    color: white;
+    height: 50px;
+    margin-right: 1px;
+    font-size: 12px;
+}
+#footer-btn2 {
+    background: #C1270B !important;
+    color: white;
+    height: 50px;
+    margin-left: 1px;
+    font-size: 12px;
+}

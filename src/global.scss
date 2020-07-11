@@ -1,0 +1,63 @@
+
+@import "~@ionic/angular/css/core.css";
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import 'assets/css/main-theme.css';
+@import 'assets/css/style.css';
+@import '~ngx-bar-rating/themes/br-default-theme' ;
+.modalCss .modal-wrapper {
+    width:  100%;
+    height: 100%; 
+    background: transparent;
+}
+
+.logoIcon{
+   height:30px
+}
+
+.size-font{
+    font-size: 14px !important;
+    color: black !important;
+}
+.bold-font{
+    font-weight: bold !important;
+}
+
+//ibbuild css after inspecting
+
+.sc-ion-modal-md-h.sc-ion-modal-md-s.md.hydrated.show-modal .modal-wrapper.sc-ion-modal-md{
+ background: none;
+}
+
+// //Manage white screen coming on home page android
+// .plt-android.plt-mobile.plt-mobileweb.md.hydrated{
+//     margin-top: -79px !important;
+// }
+// //Manage white screen coming on home page ios
+
+// .plt-iphone.plt-ios.plt-mobile.plt-mobileweb.ios.hydrated{
+//     margin-top: -83px !important;
+// }
+
+// .plt-android.plt-phablet.plt-cordova.plt-mobile.plt-hybrid.md.hydrated{
+//     margin-top: -79px !important;
+// }
+
+// .plt-desktop.md .hydrated{
+//     margin-top: -79px !important;
+// }
+
+.invalidEntry{
+    border: 1px solid red
+}
+

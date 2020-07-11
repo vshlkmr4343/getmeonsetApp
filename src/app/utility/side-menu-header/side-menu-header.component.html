@@ -1,0 +1,12 @@
+<ion-item style="--padding: 0" color="dark" *ngIf="userData">
+  <ion-avatar slot="start">
+    <img *ngIf="!profile_pic || isLoggedIn == false" src="assets/images/talent1.png">
+    <img *ngIf="profile_pic && isLoggedIn" src="{{profile_pic}}">
+  </ion-avatar>
+  <ion-label>
+    <h2 *ngIf="!name || isLoggedIn == false">Dylan Larkin</h2>
+    <h2 *ngIf="name && isLoggedIn">{{name}}</h2>
+    <p *ngIf="!email || isLoggedIn == false">dylanlarkin@email.com</p>
+    <p *ngIf="email && isLoggedIn">{{email}}</p>
+  </ion-label>
+</ion-item>

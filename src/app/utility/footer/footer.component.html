@@ -1,0 +1,9 @@
+<ion-footer style="--background: #000000 !important ;" *ngIf="!isLoggedIn">
+  <div style="position: absolute; background-color: transparent; bottom: 0px; width: 100%">
+    <div class="row">
+      <button id="footer-btn1" class="col col-50 button button-block" [routerLink]="['/sign-in']">SIGN IN</button>
+      <button id="footer-btn2" class="col col-50 button button-block" [routerLink]="['/sign-up']">JOIN FOR
+        FREE</button>
+    </div>
+  </div>
+</ion-footer>

@@ -1,0 +1,68 @@
+@import '../../../assets/css/main-theme.css';
+@import '../../../assets/css/style.css';
+.container {
+    width: 100%;
+    height: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+}
+.col-form-label {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form-check-label {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+.position{
+    background: white;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+#footer-btn1 {
+    --background: #FFFFFF;
+    color: black;
+    font-size:10px;
+    margin-left: 10px;
+    margin-right: auto;
+   }
+#footer-btn2 {
+    --background: #012E4D;
+    color: white;
+    font-size:10px
+   }
+   .footer-div{
+    position: fixed; 
+    background-color: #999999; 
+    bottom: 0px; width: 100%
+   }
+   .footer-label{
+    margin-top: 12px;
+    margin-bottom: auto;
+    color: white;
+    font-size: 14px;
+   }
+  

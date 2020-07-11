@@ -1,0 +1,1162 @@
+<app-header></app-header>
+<ion-content>
+	<div class="fixed-heading">
+		<ion-row style="width: 100%;">
+			<ion-col class="tabItem" size="3" [ngClass]="{'highlightedTab': showTab === 'editTab'}"
+				(click)="changeTab('editTab')">
+				<span>Basic info</span>
+			</ion-col>
+			<ion-col class="tabItem" size="3" [ngClass]="{'highlightedTab': showTab === 'additionalPhotoTab'}"
+				(click)="changeTab('additionalPhotoTab')">
+				<span>Additional Photos</span>
+			</ion-col>
+			<ion-col class="tabItem" size="3" (click)="changeTab('notificationTab')"
+				[ngClass]="{'highlightedTab': showTab === 'notificationTab'}">
+				<span>Email Notification</span>
+			</ion-col>
+			<ion-col class="tabItem" size="3" [ngClass]="{'highlightedTab': showTab === 'profileTab'}" [routerLink]="['/user/display',usersId,usersType]">
+				<span>View Profile</span>
+			</ion-col>
+		</ion-row>
+	</div>
+	<div class="flex-shrink-0 ">
+		<div class="container" *ngIf="showTab == 'editTab'">
+			<div class="row">
+				<div>
+					<div class="row">
+						<div class="col-sm-9 mt-3">
+							<div class="tab-content" id="v-pills-tabContent">
+								<div class="tab-pane fade show active" id="v-pills-basic" role="tabpanel"
+									aria-labelledby="v-pills-basic-tab">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="card shadow-sm">
+												<div class="card-body pb-0">
+													<form [formGroup]="editform" (submit)="onUpdate()"
+														enctype="multipart/form-data">
+														<div class="row mt-2 ">
+															<ion-row style="width: 100%;padding-left: 12px;">
+																<ion-col size="6">
+																	<label class="col-form-label ">Referral
+																		code</label>
+																</ion-col>
+																<ion-col size="6">
+																	<label
+																		class="col-sm-6 col-lg-4 col-form-label text-sm-right">{{referralCode}}</label>
+																</ion-col>
+															</ion-row>
+														</div>
+														<div class="row mb-2">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Use
+																account as</label>
+															<div style="width: 92%;" class="ml-3 ">
+																<angular2-multiselect [data]="dropdownList"
+																	[(ngModel)]="usersType"
+																	(onSelect)="toggleUser($event)"
+																	(onDeSelect)="toggleDeSelectUser($event)"
+																	(onSelectAll)="onSelectAll($event)"
+																	(onDeSelectAll)="onDeSelectAll($event)"
+																	[ngModelOptions]="{standalone: true}"
+																	[settings]="dropdownSettings">
+																</angular2-multiselect>
+															</div>
+														</div>
+														<div class="form-group row">
+															<div class="col-lg-8 offset-lg-4 col-sm-6 offset-sm-6">
+																<div class="input-group">
+																	<div class="custom-file custom-file-photo">
+																		<input class="custom-file-input"
+																			id="inputGroupFile02"
+																			formControlName="profileImage" #imageInput
+																			(click)="addPhoto('profileImage')">
+																		<label class="custom-file-label"
+																			for="inputGroupFile02"
+																			aria-describedby="inputGroupFileAddon02">
+																			<img *ngIf="!profileImage"
+																				src="assets/images/talent1.png"
+																				class="rounded float-left"
+																				alt="Upload your photo"
+																				style="width:80px;">
+																			<img *ngIf="profileImage"
+																				src={{profileImage}}
+																				class="rounded float-left"
+																				alt="Upload your photo"
+																				style="width:80px;">
+																		</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Full
+																name *</label>
+															<div class="col-sm-6 col-lg-4">
+																<input type="text" class="form-control"
+																	formControlName="fullName"
+																	[(ngModel)]="usersDetails.fullName"
+																	[ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
+																	uppercase>
+															</div>
+															<div *ngIf="submitted && f.fullName.errors"
+																class="col-sm-6 col-lg-4">
+																<div *ngIf="f.fullName.errors.required">Full Name
+																	required</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Email
+																address *</label>
+															<div class="col-sm-6 col-lg-4">
+																<input type="text" class="form-control"
+																	formControlName="email"
+																	[(ngModel)]="usersDetails.email"
+																	[ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+																	disabled>
+																<div *ngIf="submitted && f.email.errors"
+																	class="invalid-feedback">
+																	<div *ngIf="f.email.errors.required">Email address
+																		required</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Display
+																email publicly</label>
+															<div class="col-sm-6 col-lg-8">
+																<div class="custom-control custom-switch">
+																	<input type="checkbox" class="custom-control-input"
+																		id="customSwitch1"
+																		formControlName="isEmailPublic"
+																		[(ngModel)]="usersDetails.isEmailPublic">
+																	<label class="custom-control-label"
+																		for="customSwitch1"></label>
+																</div>
+																<small class="text-secondary">Email address will be
+																	displayed publicly if the switch is on.</small>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Phone
+																number *</label>
+															<div class="col-sm-6 col-lg-4">
+																<input type="text" class="form-control"
+																	formControlName="phone"
+																	[(ngModel)]="usersDetails.phone"
+																	[ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+																	appPhoneMask>
+																<div *ngIf="submitted && f.phone.errors"
+																	class="invalid-feedback">
+																	<div *ngIf="f.phone.errors.required">Phone number
+																		required</div>
+																	<div *ngIf="f.phone.errors.maxlength">Phone number
+																		must be at most 10 characters</div>
+																</div>
+																<div *ngIf="isPhoneVerify">
+																	<input type="text"
+																		placeholder="Please enter the phone verified code"
+																		class="form-control mt-3"
+																		[ngClass]="phoneVerify" id="phoneVerify"
+																		[(ngModel)]="otpPhone"
+																		[ngModelOptions]="{standalone: true}">
+																	<div class="my-3">
+																		<button (click)="otpPhoneVerified()"
+																			class="btn btn-primary shadow-sm btn-sm">Verify
+																			now</button>
+																	</div>
+																</div>
+															</div>
+															<div *ngIf="!isPhoneVerify"
+																[ngClass]="{ 'closeLink': closePhoneLink }"
+																class="col-sm-6 col-lg-4 col-form-label offset-sm-6 offset-lg-0">
+																<a href="javascript:void(0);" (click)="verifyPhone()"
+																	class="text-link">Verify now</a>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Display
+																phone publicly</label>
+															<div class="col-sm-6 col-lg-8">
+																<div class="custom-control custom-switch">
+																	<input type="checkbox" class="custom-control-input"
+																		id="customSwitch2"
+																		formControlName="isPhonePublic"
+																		[(ngModel)]="usersDetails.isPhonePublic">
+																	<label class="custom-control-label"
+																		for="customSwitch2"></label>
+																</div>
+																<small class="text-secondary">Phone number will be
+																	displayed publicly if the switch is on.</small>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Gender
+																*</label>
+															<div class="col-sm-6 col-lg-4">
+																<select class="form-control" formControlName="gender"
+																	[(ngModel)]="usersDetails.gender"
+																	[ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+																	<option value="1">Any</option>
+																	<option value="2">Male</option>
+																	<option value="3">Female</option>
+																</select>
+																<div *ngIf="submitted &&  f.gender.errors"
+																	class="invalid-feedback">
+																	<div *ngIf="f.gender.errors.required">Gender is
+																		required</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Location
+																*</label>
+															<div class="col-sm-6 col-lg-4" style="position: relative;">
+																<input id="locationInput" ngx-google-places-autocomplete
+																	[options]="{types: [],componentRestrictions: { country: 'USA' } }"
+																	(onAddressChange)="handleAddressChange($event)"
+																	type="text" class="form-control"
+																	formControlName="fullAddress"
+																	[(ngModel)]="fullAddress"
+																	[ngClass]="{ 'is-invalid': submitted && f.fullAddress.errors}">
+																<div *ngIf="submitted && f.fullAddress.errors"
+																	class="invalid-feedback">
+																	<div *ngIf="f.fullAddress.errors.required">Address
+																		is required</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Display
+																address publicly</label>
+															<div class="col-sm-6 col-lg-8">
+																<div class="custom-control custom-switch">
+																	<input type="checkbox" class="custom-control-input"
+																		id="customSwitch3"
+																		formControlName="isAddressPublic"
+																		[(ngModel)]="usersDetails.isAddressPublic">
+																	<label class="custom-control-label"
+																		for="customSwitch3"></label>
+																</div>
+																<small class="text-secondary">Address will be displayed
+																	publicly if the switch is on.</small>
+															</div>
+														</div>
+
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">User
+																rating/Link to all reviews </label>
+															<div class="col-sm-6 col-lg-4">
+																<textarea class="form-control"
+																	formControlName="usersRating"
+																	[(ngModel)]="usersDetails.usersRating"></textarea>
+															</div>
+														</div>
+
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">BIO
+															</label>
+															<div class="col-sm-6 col-lg-4">
+																<textarea class="form-control"
+																	formControlName="usersBio"
+																	[(ngModel)]="usersDetails.usersBio"></textarea>
+															</div>
+														</div>
+														<div formArrayName="imdbLink">
+															<div class="form-group row"
+																*ngFor="let imdb of imdbForms.controls; let i=index;"
+																[formGroupName]="i">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">IMDB/Social
+																	media link</label>
+																<div class="col-sm-6 col-lg-4 d-flex">
+																	<input type="text" placeholder="https://example.com"
+																		class="form-control" formControlName="link">
+																	<button *ngIf="imdbForms.controls.length == i + 1 "
+																		class="shadow-sm btn btn-primary"
+																		(click)="addImdb(); $event.preventDefault();"><i
+																			class="fas fa-plus"></i></button>
+																	<button *ngIf="i > 0"
+																		class="shadow-sm btn btn-danger"
+																		(click)="deleteImdb(i)"><i
+																			class="fas fa-times"></i></button>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Website
+																link</label>
+															<div class="col-sm-6 col-lg-4">
+																<input type="text" placeholder="https://example.com"
+																	class="form-control" formControlName="websiteLink"
+																	[(ngModel)]="usersDetails.websiteLink">
+															</div>
+														</div>
+
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right">Upload
+																resume</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="input-group"
+																	(click)="uploadResume('resume')">
+																	<div class="custom-file">
+																		<!-- <input class="custom-file-input"
+																			id="inputGroupFile02"
+																			formControlName="resume" #resumeInput> -->
+																		<input type="file" class="custom-file-input"
+																			id="inputGroupFile02"
+																			formControlName="resume" #resumeInput
+																			(change)="uploadResume(resumeInput)">
+																		<label class="custom-file-label"
+																			for="inputGroupFile02"
+																			aria-describedby="inputGroupFileAddon02">Choose
+																			file</label>
+																	</div>
+																</div>
+																<div><small
+																		*ngIf="uploadedFile">{{uploadedFile}}</small>
+																</div>
+																<div>
+																	<small class="text-secondary">File type: doc, pdf |
+																		Max
+																		file size: 5mb</small>
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group row submit_basic_info">
+															<div class="col-sm-6 col-lg-8 offset-lg-4 offset-sm-6">
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="card-body pt-0" *ngIf="vendorTab">
+													<form [formGroup]="vendorEditform" (submit)="vendorUpdate()">
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Accounting
+																/ Payroll *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="accounting" id="inlineRadio3"
+																		[(ngModel)]="usersDetails.accounting" value="1"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.accounting.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio3">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="accounting" id="inlineRadio4"
+																		[(ngModel)]="usersDetails.accounting" value="0"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.accounting.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio4">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Audio
+																/ Sound *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="audio" id="inlineRadio13"
+																		value="1" [(ngModel)]="usersDetails.audio"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.audio.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio13">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="audio" id="inlineRadio14"
+																		value="0" [(ngModel)]="usersDetails.audio"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.audio.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio14">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Catering
+																*</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="catering" id="inlineRadio15"
+																		value="1" [(ngModel)]="usersDetails.catering"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.catering.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio15">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="catering" id="inlineRadio16"
+																		value="0" [(ngModel)]="usersDetails.catering"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.catering.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio16">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Distribution
+																*</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="distribution"
+																		id="inlineRadio17" value="1"
+																		[(ngModel)]="usersDetails.distribution"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.distribution.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio17">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="distribution"
+																		id="inlineRadio18"
+																		[(ngModel)]="usersDetails.distribution"
+																		value="0"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.distribution.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio18">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Equipment
+																Rentals</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check"
+																	*ngFor="let data of equipmentRentalArray">
+																	<input class="form-check-input"
+																		(change)="selectEquimentRendalData($event)"
+																		[(ngModel)]="data.selected" type="checkbox"
+																		[ngModelOptions]="{standalone: true}">
+																	<label class="form-check-label" for="defaultCheck1">
+																		{{data.label}}
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Insurance
+																*</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="insurance" id="inlineRadio19"
+																		value="1" [(ngModel)]="usersDetails.insurance"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.insurance.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio19">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="insurance" id="inlineRadio20"
+																		value="0" [(ngModel)]="usersDetails.insurance"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.insurance.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio20">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Legal
+																*</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="legal" id="inlineRadio21"
+																		value="1" [(ngModel)]="usersDetails.legal"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.legal.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio21">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="legal" id="inlineRadio22"
+																		value="0" [(ngModel)]="usersDetails.legal"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.legal.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio22">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Post
+																Production *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="postProduction"
+																		id="inlineRadio23" value="1"
+																		[(ngModel)]="usersDetails.postProduction"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.postProduction.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio23">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="postProduction"
+																		id="inlineRadio24" value="0"
+																		[(ngModel)]="usersDetails.postProduction"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.postProduction.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio24">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Props
+																Rental & Supplies *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="propsRental" id="inlineRadio25"
+																		value="1" [(ngModel)]="usersDetails.propsRental"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.propsRental.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio25">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="propsRental" id="inlineRadio26"
+																		value="0" [(ngModel)]="usersDetails.propsRental"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.propsRental.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio26">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Security
+																*</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="security" id="inlineRadio27"
+																		value="1" [(ngModel)]="usersDetails.security"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.security.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio27">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="security" id="inlineRadio28"
+																		value="0" [(ngModel)]="usersDetails.security"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.security.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio28">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Stages
+																& Studios *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="stagesStudios"
+																		id="inlineRadio29" value="1"
+																		[(ngModel)]="usersDetails.stagesStudios"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.stagesStudios.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio29">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="stagesStudios"
+																		id="inlineRadio30" value="0"
+																		[(ngModel)]="usersDetails.stagesStudios"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.stagesStudios.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio30">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Talent
+																/ Casting *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="talentCasting"
+																		id="inlineRadio31" value="1"
+																		[(ngModel)]="usersDetails.talentCasting"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.talentCasting.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio31">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="talentCasting"
+																		id="inlineRadio32" value="0"
+																		[(ngModel)]="usersDetails.talentCasting"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.talentCasting.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio32">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Transportation
+																*</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="transportation"
+																		id="inlineRadio33" value="1"
+																		[(ngModel)]="usersDetails.transportation"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.transportation.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio33">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="transportation"
+																		id="inlineRadio34" value="0"
+																		[(ngModel)]="usersDetails.transportation"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.transportation.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio34">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Travel
+																/ Accommodations *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="travelAccommodations"
+																		id="inlineRadio35" value="1"
+																		[(ngModel)]="usersDetails.travelAccommodations"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.travelAccommodations.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio35">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="travelAccommodations"
+																		id="inlineRadio36" value="0"
+																		[(ngModel)]="usersDetails.travelAccommodations"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.travelAccommodations.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio36">No</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Wardrobe
+																/ Costumes *</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="wardrobeCostumes"
+																		id="inlineRadio37" value="1"
+																		[(ngModel)]="usersDetails.wardrobeCostumes"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.wardrobeCostumes.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio37">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" checked type="radio"
+																		formControlName="wardrobeCostumes"
+																		id="inlineRadio38" value="0"
+																		[(ngModel)]="usersDetails.wardrobeCostumes"
+																		[ngClass]="{ 'is-invalid': vendorSubmitted && d.wardrobeCostumes.errors }">
+																	<label class="form-check-label"
+																		for="inlineRadio38">No</label>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="card-body pt-0" *ngIf="crewTab">
+													<form [formGroup]="creweditform" (submit)="crewUpdate()"
+														enctype="multipart/form-data">
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Jobs
+																interested in</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check"
+																	*ngFor="let data of jobInterestedInArray">
+																	<input class="form-check-input"
+																		(change)="selectjobinterestedData($event)"
+																		[(ngModel)]="data.selected" type="checkbox"
+																		[ngModelOptions]="{standalone: true}">
+																	<label class="form-check-label" for="defaultCheck1">
+																		{{data.label}}
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Experienced
+																in</label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check"
+																	*ngFor="let data of experiencedInArray">
+																	<input class="form-check-input"
+																		(change)="selectexperiencedData($event)"
+																		[(ngModel)]="data.selected" type="checkbox"
+																		[ngModelOptions]="{standalone: true}">
+																	<label class="form-check-label" for="defaultCheck1">
+																		{{data.label}}
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row">
+															<label
+																class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Equipment
+																owned </label>
+															<div class="col-sm-6 col-lg-4">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="equipmentOwned"
+																		[(ngModel)]="usersDetails.equipmentOwned"
+																		id="inlineRadio1" value="1"
+																		(click)="toggleEquipmentOwnedDescription($event)">
+																	<label class="form-check-label"
+																		for="inlineRadio1">Yes</label>
+																</div>
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		formControlName="equipmentOwned"
+																		[(ngModel)]="usersDetails.equipmentOwned"
+																		id="inlineRadio2" value="0"
+																		(click)="toggleEquipmentOwnedDescription($event)">
+																	<label class="form-check-label"
+																		for="inlineRadio2">No</label>
+																</div>
+																<textarea *ngIf="equipmentOwnedDescriptionChecked"
+																	class="form-control mt-2" placeholder="Description"
+																	formControlName="equipmentOwnedDescription"
+																	[(ngModel)]="usersDetails.equipmentOwnedDescription"></textarea>
+															</div>
+														</div>
+														<div class="form-group row submit_crew_info">
+															<div class="col-sm-6 col-lg-8 offset-lg-4 offset-sm-6">
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="card-body pt-0">
+													<form [formGroup]="talenteditform" (submit)="profileUpdate()"
+														enctype="multipart/form-data">
+														<div *ngIf="talentTab">
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">Full
+																	body pic <br><small>(Must be within five
+																		years)</small></label>
+																<div class="col-lg-8 col-sm-6">
+																	<div class="input-group">
+																		<div class="custom-file custom-file-photo">
+																			<input class="custom-file-input"
+																				id="inputGroupFile05"
+																				formControlName="fullBodyImage"
+																				#fullbodyimageInput
+																				(click)="addPhoto('fullBodyImage')">
+																			<label class="custom-file-label"
+																				for="inputGroupFile05"
+																				aria-describedby="inputGroupFileAddon05">
+																				<img *ngIf="!fullBodyPic"
+																					src="assets/images/talent1.png"
+																					class="rounded float-left"
+																					alt="Upload your photo"
+																					style="width:80px;">
+																				<img *ngIf="fullBodyPic"
+																					src="{{fullBodyPic}}"
+																					class="rounded float-left"
+																					alt="Upload your photo"
+																					style="width:80px;"></label>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">Age
+																	*</label>
+																<div class="col-sm-6 col-lg-4">
+																	<select class="form-control" formControlName="age"
+																		[(ngModel)]="usersDetails.age"
+																		[ngClass]="{ 'is-invalid': talentSubmitted && t.age.errors }">
+																		<option _ngcontent-c8="" value=""
+																			ng-reflect-value="">Select</option>
+																		<option *ngFor="let age of getValues(20, 60);"
+																			[value]="age">{{age}}</option>
+																	</select>
+																	<div *ngIf="talentSubmitted && t.age.errors"
+																		class="invalid-feedback">
+																		<div *ngIf="t.age.errors.required">Age required
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">Race
+																	*</label>
+																<div class="col-sm-6 col-lg-4">
+																	<select class="form-control" formControlName="race"
+																		[(ngModel)]="usersDetails.race"
+																		[ngClass]="{ 'is-invalid': talentSubmitted && t.race.errors }">
+																		<option _ngcontent-c8="" value=""
+																			ng-reflect-value="">Select</option>
+																		<option *ngFor="let race of raceArray;"
+																			[value]="race">{{race}} </option>
+																	</select>
+																	<div *ngIf="talentSubmitted && t.race.errors"
+																		class="invalid-feedback">
+																		<div *ngIf="t.race.errors.required">Race
+																			required</div>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">Physical
+																	Characteristics *</label>
+																<div class="col-sm-6 col-lg-4">
+																	<select class="form-control"
+																		formControlName="physicalCharacteristics"
+																		[(ngModel)]="usersDetails.physicalCharacteristics"
+																		[ngClass]="{ 'is-invalid': talentSubmitted && t.physicalCharacteristics.errors }">
+																		<option _ngcontent-c8="" value=""
+																			ng-reflect-value="">Select</option>
+																		<option
+																			*ngFor="let physicalCharacteristics of physicalCharacteristicsArray;"
+																			[value]="physicalCharacteristics">
+																			{{physicalCharacteristics}} </option>
+																	</select>
+																	<div *ngIf="talentSubmitted && t.physicalCharacteristics.errors"
+																		class="invalid-feedback">
+																		<div
+																			*ngIf="t.physicalCharacteristics.errors.required">
+																			Physical Characteristics required</div>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">Height
+																	*</label>
+
+																<div class="col-sm-6 col-lg-4">
+																	<select class="form-control"
+																		formControlName="height"
+																		[(ngModel)]="usersDetails.height"
+																		[ngClass]="{ 'is-invalid': talentSubmitted && t.height.errors }">
+																		<option _ngcontent-c8="" value=""
+																			ng-reflect-value="">Select</option>
+																		<option value="36">3'</option>
+																		<option value="37">3'1"</option>
+																		<option value="38">3'2"</option>
+																		<option value="39">3'3"</option>
+																		<option value="40">3'4"</option>
+																		<option value="41">3'5"</option>
+																		<option value="42">3'6"</option>
+																		<option value="43">3'7"</option>
+																		<option value="44">3'8"</option>
+																		<option value="45">3'9"</option>
+																		<option value="46">3'10"</option>
+																		<option value="47">3'11"</option>
+																		<option value="48">4'</option>
+																		<option value="49">4'1"</option>
+																		<option value="50">4'2"</option>
+																		<option value="51">4'3"</option>
+																		<option value="52">4'4"</option>
+																		<option value="53">4'5"</option>
+																		<option value="54">4'6"</option>
+																		<option value="55">4'7"</option>
+																		<option value="56">4'8"</option>
+																		<option value="57">4'9"</option>
+																		<option value="58">4'10"</option>
+																		<option value="59">4'11"</option>
+																		<option value="60">5'</option>
+																		<option value="61">5'1"</option>
+																		<option value="62">5'2"</option>
+																		<option value="63">5'3"</option>
+																		<option value="64">5'4"</option>
+																		<option value="65">5'5"</option>
+																		<option value="66">5'6"</option>
+																		<option value="67">5'7"</option>
+																		<option value="68">5'8"</option>
+																		<option value="69">5'9"</option>
+																		<option value="70">5'10"</option>
+																		<option value="71">5'11"</option>
+																		<option value="72">6'</option>
+																		<option value="73">6'1"</option>
+																		<option value="74">6'2"</option>
+																		<option value="75">6'3"</option>
+																		<option value="76">6'4"</option>
+																		<option value="77">6'5"</option>
+																		<option value="78">6'6"</option>
+																		<option value="79">6'7"</option>
+																		<option value="80">6'8"</option>
+																		<option value="81">6'9"</option>
+																		<option value="82">6'10"</option>
+																		<option value="84">7'</option>
+																	</select>
+																	<div *ngIf="talentSubmitted && t.height.errors"
+																		class="invalid-feedback">
+																		<div *ngIf="t.height.errors.required">Height
+																			required</div>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">Weight
+																	*</label>
+																<div class="col-sm-6 col-lg-4">
+																	<select class="form-control"
+																		formControlName="weight"
+																		[(ngModel)]="usersDetails.weight"
+																		[ngClass]="{ 'is-invalid': talentSubmitted && t.weight.errors }">
+																		<option _ngcontent-c8="" value=""
+																			ng-reflect-value="">Select</option>
+																		<option
+																			*ngFor="let weight of getValues(40, 300);"
+																			[value]="weight">{{weight}} lb</option>
+																	</select>
+																	<div *ngIf="talentSubmitted && t.weight.errors"
+																		class="invalid-feedback">
+																		<div *ngIf="t.weight.errors.required">Weight
+																			required</div>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right">Hair
+																	color *</label>
+																<div class="col-sm-6 col-lg-4">
+																	<select class="form-control"
+																		formControlName="hairColor"
+																		[(ngModel)]="usersDetails.hairColor"
+																		[ngClass]="{ 'is-invalid': talentSubmitted && t.hairColor.errors }">
+																		<option _ngcontent-c8="" value=""
+																			ng-reflect-value="">Select</option>
+																		<option value="black">Black</option>
+																		<option value="blonde">Blonde</option>
+																		<option value="brown">Brown</option>
+																		<option value="grey">Grey</option>
+																		<option value="red">Red</option>
+																	</select>
+																	<div *ngIf="talentSubmitted && t.hairColor.errors"
+																		class="invalid-feedback">
+																		<div *ngIf="t.hairColor.errors.required">Hair
+																			color required</div>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Tattoos
+																	*</label>
+																<div class="col-sm-6 col-lg-4">
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="radio"
+																			formControlName="tattoos"
+																			[(ngModel)]="usersDetails.tattoos"
+																			id="inlineRadio1" value="1"
+																			(click)="toggletattoosDescription($event)">
+																		<label class="form-check-label"
+																			for="inlineRadio1">Yes</label>
+																	</div>
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="radio"
+																			formControlName="tattoos"
+																			[(ngModel)]="usersDetails.tattoos"
+																			id="inlineRadio2" value="0"
+																			(click)="toggletattoosDescription($event)">
+																		<label class="form-check-label"
+																			for="inlineRadio2">No</label>
+																	</div>
+																	<textarea *ngIf="tattoosDescriptionChecked"
+																		class="form-control mt-2"
+																		placeholder="Description"
+																		formControlName="tattoosDescription"
+																		[(ngModel)]="usersDetails.tattoosDescription"></textarea>
+
+																</div>
+															</div>
+
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Piercings
+																	*</label>
+																<div class="col-sm-6 col-lg-4">
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" type="radio"
+																			formControlName="piercings"
+																			[(ngModel)]="usersDetails.piercings"
+																			id="inlineRadio3" value="1">
+																		<label class="form-check-label"
+																			for="inlineRadio3">Yes</label>
+																	</div>
+																	<div class="form-check form-check-inline">
+																		<input class="form-check-input" checked
+																			type="radio" formControlName="piercings"
+																			[(ngModel)]="usersDetails.piercings"
+																			id="inlineRadio4" value="0">
+																		<label class="form-check-label"
+																			for="inlineRadio4">No</label>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Willing
+																	to travel?</label>
+																<div class="col-sm-6 col-lg-4">
+																	<div class="form-check"
+																		*ngFor="let data of willingToTravelArray">
+																		<input class="form-check-input"
+																			(change)="selectData($event)"
+																			[(ngModel)]="data.selected" type="checkbox"
+																			[ngModelOptions]="{standalone: true}">
+																		<label class="form-check-label"
+																			for="defaultCheck1">
+																			{{data.label}}
+																		</label>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group row">
+																<label
+																	class="col-sm-6 col-lg-4 col-form-label text-sm-right pt-0">Union?</label>
+																<div class="col-sm-6 col-lg-4">
+																	<div class="form-check"
+																		*ngFor="let data of unionArray">
+																		<input class="form-check-input"
+																			(change)="selectUnionData($event)"
+																			[(ngModel)]="data.selected" type="checkbox"
+																			[ngModelOptions]="{standalone: true}">
+																		<label class="form-check-label"
+																			for="defaultCheck1">
+																			{{data.label}}
+																		</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="form-group row submit_talent_info">
+															<div class="col-sm-6 col-lg-8 offset-lg-4 offset-sm-6">
+																<button
+																	class="btn btn-primary shadow-sm">SUBMIT</button>
+															</div>
+														</div>
+														<div class="mt-3 text-muted">* marked fields are mandatory</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="v-pills-producer" role="tabpanel"
+									aria-labelledby="v-pills-producer-tab">
+									<div class="card shadow-sm">
+										<div class="card-body">
+											Fields
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="showTab == 'notificationTab'">
+			<div style="margin-top: 100px;">
+				<div class="col-lg-12">
+					<div class="card shadow-sm">
+						<div class="card-body">
+							<div *ngFor="let notification of emailNotifications; let i = index">
+								<ion-row style="width: 100%">
+									<ion-col size="1">
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" id="customSwitch1{{i}}"
+												[checked]="notification.notificationStatus =='1'"
+												(click)="switchClicked($event, notification.emailNotificationId, notification.emailNotificationMapId)">
+											<label class="custom-control-label" for="customSwitch1{{i}}"></label>
+										</div>
+									</ion-col>
+									<ion-col size="11">
+										<div>
+											&nbsp;{{notification.notificationText}}
+											<span
+												*ngIf="notification.emailNotificationId =='1' || notification.emailNotificationId =='2'">within
+												<select name="miles{{i}}" [(ngModel)]="notification.relatedVal">
+													<option [value]="25">25</option>
+													<option [value]="50">50</option>
+													<option [value]="75">75</option>
+													<option [value]="100">100</option>
+												</select>&nbsp;miles
+											</span>
+										</div>
+									</ion-col>
+								</ion-row>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="showTab == 'additionalPhotoTab'">
+			<div class="form-group row">
+				<ion-row style="width: 100%;margin-top: 100px;">
+					<ion-col *ngFor="let img of usersImages" size="4" style="height: 90px;padding: 5px;">
+						<div style="position: absolute; height:90px ; width:100%;margin: auto;">
+							<img  src={{img.image}} class="rounded float-left"
+						      alt="Upload additional Image" style="width:100%; height:90px">
+						</div>
+					    <ion-buttons style="position: relative; margin-top: 0px; margin-left: 90px;" (click)="deleteAdditionalImages(img.imageId)">
+							<ion-button>
+								<ion-icon name="trash-outline"></ion-icon>
+							</ion-button>
+						</ion-buttons>
+					</ion-col>
+				</ion-row>
+			</div>
+		</div>
+	</div>
+</ion-content>

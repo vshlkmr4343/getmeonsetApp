@@ -1,0 +1,601 @@
+<app-back-header></app-back-header>
+<ion-content>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mt-5">
+        <h5>Edit A Gig</h5>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <div *ngIf="gigsType =='1'">
+                  <form [formGroup]="crewGigForm" (submit)="editCrewGig()">
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Title *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <input type="text" class="form-control" id="" formControlName="title"
+                          [ngClass]="{ 'is-invalid': submitted && f.title.errors}" uppercase>
+                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                          <div *ngIf="f.title.errors.required">Gig title is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Type *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline3" formControlName="type" value="1"
+                            class="custom-control-input">
+                          <label class="custom-control-label" for="customRadioInline3">Documentary</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline4" formControlName="type" value="2"
+                            class="custom-control-input">
+                          <label class="custom-control-label" for="customRadioInline4">Narrative</label>
+                        </div>
+                      </div>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline3" formControlName="type" value="3"
+                            class="custom-control-input">
+                          <label class="custom-control-label" for="customRadioInline3">Commercial</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline4" formControlName="type" value="4"
+                            class="custom-control-input">
+                          <label class="custom-control-label" for="customRadioInline4">Short</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Length *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline5" formControlName="shortLength" value="1"
+                            class="custom-control-input">
+                          <label class="custom-control-label" for="customRadioInline5">Short</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline6" formControlName="shortLength" value="2"
+                            class="custom-control-input">
+                          <label class="custom-control-label" for="customRadioInline6">Feature</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Union *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline7" formControlName="unionType"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline7">Non union</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline8" formControlName="unionType"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline8">Union</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Payment *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline9" formControlName="paidType"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline9">Paid</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline10" formControlName="paidType"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline10">Unpaid</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Production
+                        start
+                        date *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <div class="input-group">
+                          <ion-datetime class="form-control" displayFormat="MM/DD/YYYY"
+                            style="border-radius: 1px solid lightgrey;"
+                            placeholder="{{productionStartDatePlaceHolder| date: 'MM/dd/yyyy'}}"
+                            formControlName="startDate"
+                            [ngClass]="{ 'is-invalid': talentGigSubmitted && t.startDate.errors}">
+                          </ion-datetime>
+                        </div>
+                        <div>
+                          <div *ngIf="talentGigSubmitted && t.startDate.errors">
+                            <div class="text-danger">Production start date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Production
+                        end
+                        date *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <div class="input-group">
+                          <ion-datetime formControlName="endDate" class="form-control" displayFormat="MM/DD/YYYY"
+                            placeholder="{{productionStartDatePlaceHolder | date: 'MM/dd/yyyy'}}"
+                            [ngClass]="{ 'is-invalid': talentGigSubmitted && t.endDate.errors}">
+                          </ion-datetime>
+                        </div>
+                        <div *ngIf="talentGigSubmitted &&  t.endDate.errors">
+                          <div *ngIf="t.endDate.errors.required" class="text-danger">
+                            Production end date is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Working days *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline11" formControlName="workingDays"
+                            class="custom-control-input" value="5">
+                          <label class="custom-control-label" for="customRadioInline11">5 days</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline12" formControlName="workingDays"
+                            class="custom-control-input" value="6">
+                          <label class="custom-control-label" for="customRadioInline12">6 days</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Total number of production days
+                        *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <input type="text" class="form-control" id="" formControlName="productionDatesNumber"
+                          [ngClass]="{ 'is-invalid': submitted && f.productionDatesNumber.errors}">
+                        <div *ngIf="submitted && f.productionDatesNumber.errors" class="invalid-feedback">
+                          <div *ngIf="f.productionDatesNumber.errors.required">Production days required</div>
+                          <div *ngIf="f.productionDatesNumber.errors.pattern">Production days nust be numeric</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Lodging provided? *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline13" formControlName="lodgingProvided"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline13">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline14" formControlName="lodgingProvided"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline14">No</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Per diem provided? *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline15" formControlName="perDimProvided"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline15">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline16" formControlName="perDimProvided"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline16">No</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">How much *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <input type="text" class="form-control" id="" formControlName="howMuch"
+                          [ngClass]="{ 'is-invalid': submitted && f.howMuch.errors}">
+                        <div *ngIf="submitted && f.howMuch.errors" class="invalid-feedback">
+                          <div *ngIf="f.howMuch.errors.required">This field required</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Travel provided? *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline17" formControlName="travelProvided"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline17">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline18" formControlName="travelProvided"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline18">No</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Kit rentals available *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline19" formControlName="kitRentalProvided"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline19">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline20" formControlName="kitRentalProvided"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline20">No</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Location *</label>
+                      <div div class="col-sm-8 col-lg-4">
+                        <ion-input (ionChange)="UpdateSearchResults()" type="text" [(ngModel)]="autocomplete.input"
+                          class="form-control" formControlName="fullAddress" placeholder="{{fullAddress}}"
+                          [ngClass]="{ 'is-invalid': submitted && !fullAddress}">
+                        </ion-input>
+                        <div *ngIf="autocompleteItems.length > 0 && ifIonChangeOccur" class="border">
+                          <ion-item *ngFor="let item of autocompleteItems"
+                            style="width: 100%; border-bottom: 1px solid #dee2e6;" lines="none"
+                            (click)="SelectSearchResult(item)">
+                            <ion-label style="font-size: 10px;">
+                              <ion-icon name="location-outline"></ion-icon>
+                              {{item.description}}
+                            </ion-label>
+                          </ion-item>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-4"><b>Positions Available</b></p>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" formControlName="adDepartment" class="custom-control-input"
+                            id="customCheck1" value="1" (change)="toggleAdDepartment($event)">
+                          <label class="custom-control-label" for="customCheck1">AD department</label>
+                        </div>
+                        <div *ngIf="adDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of adDepartmentArray; let i = index;">
+                            <input type="checkbox" id="adCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectadDepartment($event)">
+                            <label class="custom-control-label" for="adCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck5"
+                            formControlName="productionDepartment" value="1"
+                            (change)="toggleProductionDepartment($event)">
+                          <label class="custom-control-label" for="customCheck5">Production department</label>
+                        </div>
+                        <div *ngIf="productionDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of productionDepartmentArray; let i = index;">
+                            <input type="checkbox" id="productionCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectProductionDepartment($event)">
+                            <label class="custom-control-label" for="productionCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck6"
+                            formControlName="cameraDepartment" value="1" (change)="toggleCameraDepartment($event)">
+                          <label class="custom-control-label" for="customCheck6">Camera department</label>
+                        </div>
+                        <div *ngIf="cameraDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of cameraDepartmentArray; let i = index;">
+                            <input type="checkbox" id="cameraCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectCameraDepartment($event)">
+                            <label class="custom-control-label" for="cameraCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck7"
+                            formControlName="geDepartment" value="1" (change)="toggleGeDepartment($event)">
+                          <label class="custom-control-label" for="customCheck7">G & E department</label>
+                        </div>
+                        <div *ngIf="geDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of geDepartmentArray; let i = index;">
+                            <input type="checkbox" id="geCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectGeDepartment($event)">
+                            <label class="custom-control-label" for="geCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck8"
+                            formControlName="hmuDepartment" value="1" (change)="toggleHmuDepartment($event)">
+                          <label class="custom-control-label" for="customCheck8">HMU department</label>
+                        </div>
+                        <div *ngIf="hmuDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of hmuDepartmentArray; let i = index;">
+                            <input type="checkbox" id="hmuCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectHmuDepartment($event)">
+                            <label class="custom-control-label" for="hmuCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck9"
+                            formControlName="wardrobeDepartment" value="1" (change)="toggleWardrobeDepartment($event)">
+                          <label class="custom-control-label" for="customCheck9">Wardrobe department</label>
+                        </div>
+                        <div *ngIf="wardrobeDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of wardrobeDepartmentArray; let i = index;">
+                            <input type="checkbox" id="wardrobeCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectWardrobeDepartment($event)">
+                            <label class="custom-control-label" for="wardrobeCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck10"
+                            formControlName="soundDepartment" value="1" (change)="toggleSoundDepartment($event)">
+                          <label class="custom-control-label" for="customCheck10">Sound department</label>
+                        </div>
+                        <div *ngIf="soundDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of soundDepartmentArray; let i = index;">
+                            <input type="checkbox" id="soundCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectSoundDepartment($event)">
+                            <label class="custom-control-label" for="soundCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck11"
+                            formControlName="artDepartment" value="1" (change)="toggleArtDepartment($event)">
+                          <label class="custom-control-label" for="customCheck11">Art department</label>
+                        </div>
+                        <div *ngIf="artDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of artDepartmentArray; let i = index;">
+                            <input type="checkbox" id="artCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectArtDepartment($event)">
+                            <label class="custom-control-label" for="artCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" class="custom-control-input" id="customCheck12"
+                            formControlName="transportationDepartment" value="1"
+                            (change)="toggleTransportationDepartment($event)">
+                          <label class="custom-control-label" for="customCheck12">Transportation department</label>
+                        </div>
+                        <div *ngIf="transportationDepartmentSub">
+                          <div class="custom-control custom-checkbox ml-4"
+                            *ngFor="let data of transportationDepartmentArray; let i = index;">
+                            <input type="checkbox" id="transCheck_{{i}}" class="custom-control-input"
+                              [(ngModel)]="data.selected" [ngModelOptions]="{standalone: true}"
+                              (change)="selectTransportationDepartment($event)">
+                            <label class="custom-control-label" for="transCheck_{{i}}">{{data.label}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-lg-10 offset-lg-2 col-sm-8 offset-sm-4">
+                        <button type="submit" class="btn btn-primary shadow-sm">EDIT GIG</button>
+                      </div>
+                    </div>
+                    <div class="mt-3 text-muted">* marked fields are mandatory</div>
+                  </form>
+                </div>
+                <div *ngIf="gigsType == '2'">
+                  <form [formGroup]="talentGigForm" (submit)="updateTalentGig()">
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Title *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <input type="text" class="form-control" id="" formControlName="title"
+                          [ngClass]="{ 'is-invalid': talentGigSubmitted && t.title.errors}" uppercase>
+                        <div *ngIf="talentGigSubmitted && t.title.errors" class="invalid-feedback">
+                          <div *ngIf="t.title.errors.required">Gig title is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Union *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline7" formControlName="unionType"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline7">Non union</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline8" formControlName="unionType"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline8">Union</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Production
+                        start
+                        date *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <div class="input-group">
+                          <ion-datetime class="form-control" displayFormat="MM/DD/YYYY"
+                            style="border-radius: 1px solid lightgrey;"
+                            placeholder="{{productionStartDatePlaceHolder| date: 'MM/dd/yyyy'}}"
+                            formControlName="startDate"
+                            [ngClass]="{ 'is-invalid': talentGigSubmitted && t.startDate.errors}">
+                          </ion-datetime>
+                        </div>
+                        <div>
+                          <div *ngIf="talentGigSubmitted && t.startDate.errors">
+                            <div class="text-danger">Production start date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Production
+                        end
+                        date *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <div class="input-group">
+                          <ion-datetime formControlName="endDate" class="form-control" displayFormat="MM/DD/YYYY"
+                            placeholder="{{productionStartDatePlaceHolder | date: 'MM/dd/yyyy'}}"
+                            [ngClass]="{ 'is-invalid': talentGigSubmitted && t.endDate.errors}">
+                          </ion-datetime>
+                        </div>
+                        <div *ngIf="talentGigSubmitted &&  t.endDate.errors">
+                          <div *ngIf="t.endDate.errors.required" class="text-danger">
+                            Production end date is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right">Location of shoot *</label>
+                      <div class="col-sm-8 col-lg-4">
+                        <ion-input (ionChange)="UpdateSearchResults()" type="text" [(ngModel)]="autocomplete.input"
+                          class="form-control" formControlName="locationOfShoot" placeholder="{{fullAddress}}"
+                          [ngClass]="{ 'is-invalid': talentGigSubmitted && !fullAddress}">
+                        </ion-input>
+                        <div *ngIf="autocompleteItems.length > 0" class="border">
+                          <ion-item *ngFor="let item of autocompleteItems"
+                            style="width: 100%; border-bottom: 1px solid #dee2e6;" lines="none"
+                            (click)="SelectSearchResult(item)">
+                            <ion-label style="font-size: 10px;">
+                              <ion-icon name="location-outline"></ion-icon>
+                              {{item.description}}
+                            </ion-label>
+                          </ion-item>
+                        </div>
+                        <div *ngIf="talentGigSubmitted && !fullAddress">
+                          <div *ngIf="t.locationOfShoot.errors.required" class="text-danger">Location of
+                            shoot is required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Lodging provided? *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline13" formControlName="lodgingProvided"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline13">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline14" formControlName="lodgingProvided"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline14">No</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Travel provided? *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline17" formControlName="travelProvided"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline17">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline18" formControlName="travelProvided"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline18">No</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-lg-2 col-form-label text-sm-right pt-0">Per diem provided? *</label>
+                      <div class="col-sm-8 col-lg-10">
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input type="radio" id="customRadioInline15" formControlName="perDimProvided"
+                            class="custom-control-input" value="1">
+                          <label class="custom-control-label" for="customRadioInline15">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                          <input checked type="radio" id="customRadioInline16" formControlName="perDimProvided"
+                            class="custom-control-input" value="0">
+                          <label class="custom-control-label" for="customRadioInline16">No</label>
+                        </div>
+                      </div>
+                    </div>
+                    <h5 class="mt-4">Roles</h5>
+                    <div class="form-group row">
+                      <div class="col-sm-10 offset-sm-2">
+                        Role(s) You're Casting
+                        <div class="p-3 border mt-2 rounded" *ngFor="let role of roleDetailsArray;let i = index;">
+                          <strong>{{role.title}}</strong>
+                          <div class="float-right">
+                            <span class="ml-2 text-link" (click)="deleteRole(i,role)"><strong>Delete</strong></span>
+                            <span class="ml-2 text-link" (click)="addRole(role,i)"><strong>Edit</strong></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-10 offset-sm-2">
+                        <span class="btn btn-danger shadow-sm" data-toggle="modal" (click)="addRole()">ADD A ROLE</span>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-10 offset-sm-2">
+                        <button type="submit" class="btn btn-primary shadow-sm">EDIT GIG</button>
+                      </div>
+                    </div>
+                    <div class="mt-3 text-muted">* marked fields are mandatory</div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

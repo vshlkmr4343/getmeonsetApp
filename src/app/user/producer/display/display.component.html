@@ -1,0 +1,63 @@
+<app-back-header></app-back-header>
+<ion-content>
+	<div>
+		<div><img class="w-100" height="250px" [src]="producerProfileInfo.profileImage">
+			<ion-row style="margin-top: 5px;">
+				<ion-col size="2">
+					<a *ngIf="producerProfileInfo.email" href="mailto:{{producerProfileInfo.email}}" target="_top" class="p-3" data-toggle="tooltip" data-placement="top" title="Email now"><i
+							class="fas fa-envelope fa-1x text-secondary"></i></a>
+				</ion-col>
+				<ion-col size="2">
+					<a *ngIf="producerProfileInfo.phone" href="tel:{{producerProfileInfo.phone}}" class="p-3" data-toggle="tooltip" data-placement="top" title="Call now"><i class="fas fa-phone   fa-rotate-90 text-secondary"></i></a>
+				</ion-col>
+				<ion-col size="2">
+					<span class="p-3" data-toggle="tooltip" data-placement="top" title=""
+						data-original-title="Share profile" (click)="share()"><i class="fas fa-share-alt fa-1x text-secondary"></i></span>
+				</ion-col>
+				<ion-col size="2">
+					<span class="p-3"  [routerLink]="['/messages', producerProfileInfo.usersId]" *ngIf="loggedInUsersId"  data-toggle="tooltip" data-placement="top" title=""
+						data-original-title="Message now"><i class="fas fa-comments fa-1x text-secondary"></i></span>
+				</ion-col>
+				<ion-col size="2">
+
+				</ion-col>
+				<ion-col size="2">
+					<a href="javascript:void(0)" class="ml-auto p-3" data-toggle="tooltip" data-placement="top"  [title]="producerProfileInfo.isFavourite == 1 ? 'Remove from favorite' : 'Add to favorite'" (click)="addToFavorite(producerProfileInfo, loggedInUsersId)"><i class="fa-heart"  [ngClass]="producerProfileInfo.isFavourite == 1 ? 'fas text-danger' : 'far text-secondary'"></i></a>
+				</ion-col>
+			</ion-row>
+		</div>
+		<div style="padding: 3px">
+			<div class="col-lg-12">
+				<h5 class="card-title">{{producerProfileInfo.fullName}}, {{producerProfileInfo.age}}</h5>
+				<span class="size-font">{{address.fullAddress}}</span>
+				<div>
+				<span class="size-font"> {{producerProfileInfo.gender | gendertype}},  {{producerProfileInfo.heightInFeet}},  {{producerProfileInfo.weight}} lb, {{producerProfileInfo.race}}</span>
+				</div>
+				<div>
+					<span class="size-font">Joined on {{producerProfileInfo.registerDateTime}}</span>
+				</div>
+				<br>
+				<span class="size-font">
+					{{producerProfileInfo.usersBio}}
+				</span>
+			</div>
+			<div class="col-lg-12 mt-4">
+				<h5 class="card-title">Photos/Videos</h5>
+				<ion-row>
+					<ion-col size="3" *ngFor="let usersImages of usersImagesDetails; let i = index">
+						<img [src]="usersImages.image">
+					</ion-col>
+				</ion-row>
+			</div>
+			<div class="col-lg-12 mt-4">
+				<h5 class="card-title">Rating & Reviews</h5>
+				<div class="mb-3"  *ngFor="let reviews of reviewDetails; let i = index">
+					<small class="bg-success text-light rounded-sm p-1">{{reviews.ratingVal}} <i class="fas fa-star ml-1"></i></small>
+					<strong class="ml-2 size-font"><span>{{reviews.ratingByInfo.fullName}}</span>, Plainfield, {{reviews.createdAt * 1000 | date:'dd/MM/yyyy'}}</strong><br>
+					<span class="size-font">{{reviews.ratingText}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</ion-content>
+
