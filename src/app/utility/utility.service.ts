@@ -303,42 +303,7 @@ export class UtilityService {
 				title: 'VENDOR',
 				url: '/user/list/vendor',
 
-			},
-			{
-				title: 'MESSAGES',
-				url: '/messages',
-				icon: 'warning'
-			},
-			{
-				title: 'FORUM',
-				url: '/user',
-				icon: 'open'
-			},
-			{
-				title: 'GEAR RENTAL',
-				url: '/user/dashboard',
-				icon: 'open'
-			},
-			{
-				title: 'CLASSIFIEDS ',
-				url: '/user',
-				icon: 'open'
-			},
-			{
-				title: 'NOTIFICATIONS',
-				url: '/notifications',
-				icon: 'warning'
-			},
-			{
-				title: 'MY PROFILE',
-				url: '/user',
-				icon: 'arrow-forward'
-			},
-			{
-				title: 'MORE',
-				url: '/user',
-				icon: 'arrow-forward'
-			},
+			}
 		];
 		return appPages
 	}
@@ -377,27 +342,7 @@ export class UtilityService {
 				title: 'VENDOR',
 				url: '/user/list/vendor',
 
-			},
-			{
-				title: 'FORUM',
-				url: '/user',
-				icon: 'open'
-			},
-			{
-				title: 'GEAR RENTAL',
-				url: '/user/dashboard',
-				icon: 'open'
-			},
-			{
-				title: 'CLSSIFIEDS',
-				url: '/user',
-				icon: 'open'
-			},
-			{
-				title: 'MORE',
-				url: '/user',
-				icon: 'arrow-forward'
-			},
+			}
 		];
 
 		return appPages;

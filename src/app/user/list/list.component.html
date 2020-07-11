@@ -24,11 +24,10 @@
   <div style="margin-top: 55px;">
     <ion-row style="width: 100%" class="shadow-sm">
       <ion-col size="6" class="profilecol" *ngFor="let listItem of listDetails | paginate: config; let i = index">
-        <div class="profile">
-        
+        <div class="profile" [routerLink]="['/user/display', listItem.usersId,userType]">
           <img [src]="listItem.profileImage" class="profileimg"  alt="..." [routerLink]="['/user/display', listItem.usersId,userType]">
           <div class="border-right">
-            <div [routerLink]="['/user/display', listItem.usersId,userType]">
+            <div>
             <ion-card-header style="height: 110px !important;" >
               <ion-card-title  class="size-font"
                 *ngIf="listItem.fullName">{{listItem.fullName}}
@@ -38,7 +37,7 @@
               
               </div>
               <div>
-                <bar-rating [(rate)]="listItem.usersRating" [max]="5"></bar-rating>
+                <bar-rating [(rate)]="listItem.usersRating" [max]="5" [readOnly]="true"></bar-rating>
               </div>
             </ion-card-header>
             <ion-card-content style="height: 75px !important;">
