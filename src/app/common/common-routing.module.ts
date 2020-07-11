@@ -9,6 +9,7 @@ import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { FaqComponent } from './faq/faq.component';
 import { RulesComponent } from './rules/rules.component';
 import { AggrementComponent } from './aggrement/aggrement.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path : 'tos',
     component: AggrementComponent
+  },
+  {
+    path : 'my-profile',
+    component: MyProfileComponent
   }
 ];
 

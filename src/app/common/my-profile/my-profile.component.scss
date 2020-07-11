@@ -1,0 +1,61 @@
+
+.allCenter{
+  justify-content: center; 
+  text-align: center;
+  margin:auto;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  -ms-flex-align: center!important;
+    align-items: center!important;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    min-height: 100%;
+}
+
+.btn {
+    background-color: #FFFFFF;
+    color:  black;
+    font-size: 16px;
+    border: none;
+    text-align:  -webkit-center;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    font-weight: bold;
+  }
+ 
+  .btn:active {
+    background-color: #C1270B;
+    color: #FFFFFF;
+    .btn-img path{
+      fill: #FFFFFF;
+    }
+  }
+  .btn-div{
+    margin-top: 12px;
+    text-align: center;
+  }
+
+ .btn-text{
+   margin-top: 8px;
+  margin-bottom: 0px;
+ }
+ .btn-img{
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+ }
+ .btn-img path{
+  fill: black;
+}
+.btn-img:active path{
+  fill: #FFFFFF;
+}
+ .btn-col{
+  padding-left: 10px;
+  padding-right: 10px;
+ }

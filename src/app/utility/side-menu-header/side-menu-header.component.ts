@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-side-menu-header',
@@ -15,7 +16,7 @@ export class SideMenuHeaderComponent implements OnInit {
   isLoggedIn:boolean;
   usersId:any;
   @Output() onCheckLoggedIn: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private storage:Storage) { }
+  constructor(private storage:Storage,private router : Router) { }
   ngOnInit() {
     setInterval(() => {
       this.setHeaderData();
@@ -43,5 +44,8 @@ export class SideMenuHeaderComponent implements OnInit {
   public check() {
    let  emitedData = {'isLoggedIn':this.isLoggedIn,'usersId':this.previous_Id }
     this.onCheckLoggedIn.emit(emitedData);
+  }
+  myProfile(){
+this.router.navigateByUrl("/common/my-profile")
   }
 }

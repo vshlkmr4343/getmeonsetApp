@@ -15,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HowItWorksComponent } from './how-it-works/how-it-works.component';
 import { RulesComponent } from './rules/rules.component';
 import { AggrementComponent } from './aggrement/aggrement.component';
+import { MyProfileComponent } from './my-profile/my-profile.component'
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +34,7 @@ import { AggrementComponent } from './aggrement/aggrement.component';
     PrivacyPolicyComponent,
     TermsAndConditionComponent,
     HowItWorksComponent,
-    FaqComponent]
+    FaqComponent,
+    MyProfileComponent]
 })
 export class CommonPageModule {}
