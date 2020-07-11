@@ -20,7 +20,7 @@
 	</ion-item>
 	<div class="box h-100 w-100">
 		<ion-row style="width: 100%;">
-			<ion-col size="6" *ngFor="let gigs of gigsDetails | paginate: config; let i = index">
+			<ion-col size="6" *ngFor="let gigs of gigsDetails | paginate: config; let i = index" class="border">
 				<div [routerLink]="['/gigs/'+gigs.gigTypeName+'/display', gigs.gigId, gigs.gigType]">
 					<p class="box-title size-font">{{gigs.title}}</p>
 					<p class="box-heading size-font">Location: {{gigs.location.customAddress}}</p>
@@ -38,7 +38,6 @@
 					</ion-col>
 					<ion-col size="2"></ion-col>
 					<ion-col size="8">
-						<br>
 						<a *ngIf="(gigs.producerInfo.usersTypeId.length > 1 || gigs.producerInfo.usersTypeId.length == 1) && gigs.producerInfo.usersTypeId.indexOf('3') != -1 "
 							[routerLink]="['/user/talent/display/', gigs.producerInfo.usersId]">
 							<ion-label color="primary">{{gigs.producerInfo.fullName}}
