@@ -157,6 +157,9 @@ export class ListComponent implements OnInit {
       });
     return await modal.present();
   }
+  share() {
+    this.utilityService.share();
+  }
 
   getSearchModal(): import("@ionic/core").ComponentRef {
     switch (this.userType) {

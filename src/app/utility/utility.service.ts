@@ -320,7 +320,7 @@ export class UtilityService {
 				icon: 'open'
 			},
 			{
-				title: 'CLSSIFIEDS',
+				title: 'CLASSIFIEDS ',
 				url: '/user',
 				icon: 'open'
 			},

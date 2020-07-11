@@ -25,56 +25,65 @@
     <ion-row style="width: 100%" class="shadow-sm">
       <ion-col size="6" class="profilecol" *ngFor="let listItem of listDetails | paginate: config; let i = index">
         <div class="profile">
-          <img [src]="listItem.profileImage" class="profileimg"  alt="...">
+        
+          <img [src]="listItem.profileImage" class="profileimg"  alt="..." [routerLink]="['/user/display', listItem.usersId,userType]">
           <div class="border-right">
-            <ion-card-header style="height: 115px !important;" [routerLink]="['/user/display', listItem.usersId,userType]">
+            <div [routerLink]="['/user/display', listItem.usersId,userType]">
+            <ion-card-header style="height: 110px !important;" >
               <ion-card-title  class="size-font"
                 *ngIf="listItem.fullName">{{listItem.fullName}}
               </ion-card-title>
+              <div class="mt-2">
+                <span class="size-font" *ngIf="listItem.age || listItem.height || listItem.weight ">{{listItem.age}},{{listItem.heightInFeet}},{{listItem.weight}} lb </span>
+              
+              </div>
               <div>
                 <bar-rating [(rate)]="listItem.usersRating" [max]="5"></bar-rating>
               </div>
             </ion-card-header>
-            <ion-card-content style="height: 170px !important;">
+            <ion-card-content style="height: 75px !important;">
               <div style="height: 80px">
                 <p class="size-font" *ngIf="listItem.usersAddress.length">
                   {{listItem.usersAddress[0].fullAddress}}
                 </p>
               </div>
-              <div style="height: 30px;">
+              <!-- <div style="height: 30px;">
                 <span class="size-font" *ngIf="listItem.age">Age: {{listItem.age}}</span>
-              </div>
-              <div style="height: 30px;">
+              </div> -->
+              <!-- <div style="height: 30px;">
                 <span class="size-font" *ngIf="listItem.height">Height: {{listItem.heightInFeet}} </span>
-              </div>
-              <div style="height: 30px;">
+              </div> -->
+              <!-- <div style="height: 30px;">
                 <span class="size-font" *ngIf="listItem.weight">Weight: {{listItem.weight}} lb</span>
-              </div>
+              </div> -->
             </ion-card-content> 
+            </div>
             <div style="height: 30px;">
               <ion-row>
-                <ion-col size="2">
-                  <a *ngIf="listItem.email" href="mailto:{{listItem.email}}" target="_top" class="p-3"
+                <ion-col size="3" style="text-align: center; font-size: 18px;">
+                  <!-- <a *ngIf="listItem.email" href="mailto:{{listItem.email}}" target="_top"
                     data-toggle="tooltip" data-placement="top" title="Email now"><i
-                      class="fas fa-envelope fa-1x text-secondary"></i></a>
+                      class="fas fa-envelope fa-1x text-secondary"></i></a> -->
+
+                      <span [routerLink]="['/messages/gigchat/',listItem.usersId]"
+                      data-toggle="tooltip" data-placement="top" title="" data-original-title="Message now"><i
+                        class="fas fa-comments fa-1x text-secondary"></i></span>
                 </ion-col>
-                <ion-col size="2">
-                  <a *ngIf="listItem.phone" href="tel:{{listItem.phone}}" class="p-3" data-toggle="tooltip"
+                <ion-col size="3" style="text-align: center; font-size: 18px;">
+                  <a *ngIf="listItem.phone" href="tel:{{listItem.phone}}"  data-toggle="tooltip"
                     data-placement="top" title="Call now"><i class="fas fa-phone   fa-rotate-90 text-secondary"></i></a>
                 </ion-col>
-                <ion-col size="2">
-                  <span class="p-3" data-toggle="tooltip" data-placement="top" title=""
+                <ion-col size="3" style="text-align: center; font-size: 18px;">
+                  <span data-toggle="tooltip" data-placement="top" title=""
                     data-original-title="Share profile" (click)="share()"><i
                       class="fas fa-share-alt fa-1x text-secondary"></i></span>
                 </ion-col>
-                <ion-col size="2">
+                <!-- <ion-col size="3">
                   <span class="p-3" *ngIf="loggedInUsersId" data-toggle="tooltip" data-placement="top" title=""
                     data-original-title="Message now"><i class="fas fa-comments fa-1x text-secondary"></i></span>
-                </ion-col>
-                <ion-col size="1">
-                </ion-col>
-                <ion-col *ngIf="isLoggedIn" size="2" (click)="addToFavorite(i,listItem.isFavourite)">
-                  <span class="p-3" data-toggle="tooltip" data-placement="top" title="" data-original-title="Message now">
+                </ion-col> -->
+                <ion-col *ngIf="isLoggedIn" size="3" (click)="addToFavorite(i,listItem.isFavourite)" style="text-align: center; font-size: 18px;">
+                  <span data-toggle="tooltip" data-placement="top" title="" data-original-title="Message now">
                     <i class="far fa-heart fa-1x text-dark" *ngIf="listItem.isFavourite == 0"></i>
                     <i class="fas fa-heart fa-1x text-danger" *ngIf="listItem.isFavourite == 1"></i>
                   </span>

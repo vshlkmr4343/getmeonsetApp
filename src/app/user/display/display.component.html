@@ -3,11 +3,11 @@
 	<div *ngIf="userProfileInfo">
 		<div><img class="profileimg" [src]="userProfileInfo.profileImage">
 			<ion-row style="margin-top: 5px;">
-				<ion-col size="2">
+				<!-- <ion-col size="2">
 					<a *ngIf="userProfileInfo.email" href="mailto:{{userProfileInfo.email}}" target="_top" class="p-3"
 						data-toggle="tooltip" data-placement="top" title="Email now"><i
 							class="fas fa-envelope fa-1x text-secondary"></i></a>
-				</ion-col>
+				</ion-col> -->
 				<ion-col size="2">
 					<a *ngIf="userProfileInfo.phone" href="tel:{{userProfileInfo.phone}}" class="p-3"
 						data-toggle="tooltip" data-placement="top" title="Call now"><i
@@ -19,11 +19,11 @@
 							class="fas fa-share-alt fa-1x text-secondary"></i></span>
 				</ion-col>
 				<ion-col size="2">
-					<span class="p-3" [routerLink]="['/messages/gigchat/',userProfileInfo.usersId]" *ngIf="loggedInUsersId"
-						data-toggle="tooltip" data-placement="top" title="" data-original-title="Message now"><i
-							class="fas fa-comments fa-1x text-secondary"></i></span>
+					<span class="p-3" [routerLink]="['/messages/gigchat/',userProfileInfo.usersId]"
+						*ngIf="loggedInUsersId" data-toggle="tooltip" data-placement="top" title=""
+						data-original-title="Message now"><i class="fas fa-comments fa-1x text-secondary"></i></span>
 				</ion-col>
-				<ion-col size="2">
+				<ion-col size="4">
 
 				</ion-col>
 				<ion-col size="2" (click)="addToFavorite()" *ngIf="isLoggedIn">
@@ -38,7 +38,13 @@
 		<div style="padding: 3px">
 			<div class="col-lg-12">
 				<h5 class="card-title" style="margin-bottom: 0px ; margin-top: 8px;">
-					{{userProfileInfo.fullName}}</h5>
+					{{userProfileInfo.fullName}}
+				</h5>
+				<div class="mt-2">
+					<span class="size-font">{{userProfileInfo.age}},{{userProfileInfo.gender | gendertype}},
+						{{userProfileInfo.heightInFeet}},
+						{{userProfileInfo.weight}} lb</span>
+				</div>
 				<div class="d-flex">
 					<bar-rating [(rate)]="rate" *ngIf="loggedInUsersId != null" (rateChange)="addRating()" [max]="5">
 					</bar-rating>
@@ -134,21 +140,20 @@
 					</div>
 				</div>
 				<span class="size-font">{{address.fullAddress}}</span>
-				<div>
-					<!-- <span class="size-font">{{userProfileInfo.gender | gendertype}}, {{userProfileInfo.heightInFeet}},
-						{{userProfileInfo.weight}} lb</span> -->
+				<!-- <div>
+				
 					<span class="size-font">Age:{{userProfileInfo.age}}</span>
-				</div>
-				<div>
+				</div> -->
+				<!-- <div>
 					<span class="size-font">Gender:{{userProfileInfo.gender | gendertype}}</span>
-				</div>
-				<div>
+				</div> -->
+				<!-- <div>
 					<span class="size-font">Height:{{userProfileInfo.heightInFeet}}</span>
-				</div>
-				<div>
+				</div> -->
+				<!-- <div>
 					<span class="size-font">Weight:
 						{{userProfileInfo.weight}} lb</span>
-				</div>
+				</div> -->
 
 				<br>
 				<span class="size-font"
@@ -176,7 +181,11 @@
 						<span class="size-font">
 							Website : <a href="{{userProfileInfo.websiteLink}}"
 								target="_blank">{{userProfileInfo.websiteLink}}</a>
+							<ion-icon slot="end" name="open" color="medium" style="font-size: 15px;
+								margin-left: 5px;">
+							</ion-icon>
 						</span>
+
 					</div>
 					<div *ngIf="userProfileInfo.resume">
 						<span class="size-font">
@@ -280,7 +289,7 @@
 				<h5 class="card-title">Photos/Videos</h5>
 				<ion-row>
 					<ion-col size="3" *ngFor="let usersImages of usersImagesDetails; let i = index">
-						<img [src]="usersImages.image" height="100" width="100">
+						<img [src]="usersImages.image" class="subImg">
 					</ion-col>
 				</ion-row>
 			</div>
