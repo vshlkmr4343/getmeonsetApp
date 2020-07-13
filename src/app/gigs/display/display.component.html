@@ -6,7 +6,7 @@
 				<ion-col size="8">
 					<div class="card-title bold-font  " style="margin-bottom: 0px;">{{gigsProfileInfo.title}}</div>
 				</ion-col>
-				
+
 				<ion-col *ngIf="isProducer" size="1" [routerLink]="['/gigs/'+typeName+'/edit', gigId, gigsType]">
 					<span>
 						<i class="fas fa-edit  text-secondary"></i>
@@ -205,10 +205,10 @@
 							<div class="media-body">
 								<ion-row>
 									<ion-col>
-										<ion-label class="size-font"
-											[routerLink]="['/messages/gigchat', gigData.userInfo.usersId, gigId]">
+										<ion-label class="size-font">
 											{{gigData.userInfo?.fullName}}</ion-label>&nbsp;<i
-											class="fas fa-comments fa-lg text-secondary"></i>
+											class="fas fa-comments fa-lg text-secondary"
+											[routerLink]="['/messages/gigchat', gigData.userInfo.usersId, gigId]"></i>
 									</ion-col>
 								</ion-row>
 								<div class="size-font">{{gigData.description}}</div>

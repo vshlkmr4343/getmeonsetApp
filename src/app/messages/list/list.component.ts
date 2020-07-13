@@ -49,6 +49,8 @@ export class ListComponent implements OnInit {
   activeMsgSubject = '';
   gigsUserArrayDetails: any = [];
   gigUserDetail: any
+  noMsgFound: number = 0;
+
   constructor(
     private storage: Storage,
     private signupService: SignUpService,
@@ -135,15 +137,20 @@ export class ListComponent implements OnInit {
           if (this.type == 'User') {
             this.messageLists = data;
             this.messageLists = this.messageLists.data.messages;
+            this.noMsgFound = 0;
+            if (this.messageLists.length == 0) { this.noMsgFound = 1; }
           }
           if (this.type == 'Gig') {
             // this.messageLists = data;
             // this.messageLists = this.messageLists.data.messages;
             this.messageLists = [];
+            this.noMsgFound = 0;
+            if (this.messageLists.length == 0) { this.noMsgFound = 1; }
           }
 
         },
         error => {
+          this.noMsgFound = 1;
         });
   }
 
@@ -275,8 +282,11 @@ export class ListComponent implements OnInit {
         data => {
           this.messageLists = data;
           this.messageLists = this.messageLists.data.messages;
+          this.noMsgFound = 0;
+          if (this.messageLists.length == 0) { this.noMsgFound = 1; }
         },
         error => {
+          this.noMsgFound = 1;
 
         });
   }

@@ -26,10 +26,11 @@
         <a class="dropdown-item" href="#">Something else here</a>
       </div>
     </div> -->
+    <!-- [(ngModel)]="gigUserDetail" -->
     <div *ngIf="messageData.moduleId == '2'">
       <div style="padding-left: 10px; padding-right: 10px;">
-        <ion-select ok-text="Okay" cancel-text="Cancel" placeholder="Choose Your message"
-          (ionChange)="getGigMessageUsers($event.detail.value)" [(ngModel)]="gigUserDetail">
+        <ion-select ok-text="Ok" cancel-text="Cancel" placeholder="Choose Your message"
+          (ionChange)="getGigMessageUsers($event.detail.value)" >
           <ion-select-option *ngFor="let gigUsers of gigUserDetails;let i = index;"  value="{{gigUsers.gigId}}">
             {{gigUsers.title}}</ion-select-option>
         </ion-select>
@@ -67,31 +68,10 @@
         </ion-row>
       </ion-item>
     </div>
-    <!-- <ion-card>
-    <ion-item lines="none" style="--background: #F8F9FA !important; margin-left: -12px;"  class="shadow-sm">
-      <ion-row style="width: 100%;margin-top: -5px;">
-        <ion-col size="2">
-      <ion-avatar class="avatar-image2">
-        <ion-img src="../../assets/images/talent1.png" alt="">
-        </ion-img>
-      </ion-avatar>
-      </ion-col>
-      <ion-col size="5">
-      <ion-label>
-        <h3 class="sender-name">Olivia Smith</h3>
-        <p class="size-font">Last Messages here</p>
-      </ion-label>
-      </ion-col>
-      <ion-col size="4">
-        <ion-label>
-          <p class="time">02:00 AM,03/10/20</p>
-        </ion-label>
-        </ion-col>
-      <ion-col size="1">
-        <ion-badge color="medium" class="badge">11</ion-badge>
-        </ion-col>
-      </ion-row>
-    </ion-item>
-    </ion-card> -->
+    <ion-row style="width: 100%;" *ngIf="noMsgFound == 1">
+			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+				No message found.
+			</div>
+		</ion-row>
   </div>
 </ion-content>

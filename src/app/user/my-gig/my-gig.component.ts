@@ -29,21 +29,30 @@ export class MyGigComponent implements OnInit {
     limit: this.limit,
     start: this.start,
   }
+  noMyGigFound: number = 0;
+  paginationDiv:false;
+  isLoggedIn: string;
+
   constructor(private modal: ModalController,
     private userService: UserService,
     private signinService: SignInService,
     private utility: UtilityService) { }
   selectedGigs: any = "0";
   ngOnInit() {
+    this.isLoggedIn = localStorage.getItem("isLoggedin");
     this.userDetails = this.signinService.getAuthData();
     this.usersId = this.userDetails.usersId;
     this.userService.MyGiglist(this.usersId, this.selectedGigs).subscribe((response) => {
       this.myGigsArray = response.data.gigs;
+      this.noMyGigFound = 0;
+      if (this.myGigsArray.length == 0) { this.noMyGigFound = 1; }
       this.config = {
         itemsPerPage: this.limit,
         currentPage: 1,
         totalItems: this.totalRowCount
       };
+    }, error => {
+      this.noMyGigFound = 1;
     })
    // this.filterGigs(this.selectedGigs);
   }
@@ -67,7 +76,11 @@ export class MyGigComponent implements OnInit {
   filterGigs(selectedGigs) {
     this.userService.MyGiglist(this.usersId, this.selectedGigs).subscribe((response) => {
       this.myGigsArray = response.data.gigs
+      this.noMyGigFound = 0;
+      if (this.myGigsArray.length == 0) { this.noMyGigFound = 1; }
       console.log("this user id ", this.usersId)
+    }, error => {
+      this.noMyGigFound = 1;
     })
   }
   pageChange(newPage: number) {
