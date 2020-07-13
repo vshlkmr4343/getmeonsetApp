@@ -33,9 +33,15 @@
                 <ion-card-title class="size-font" *ngIf="listItem.fullName">{{listItem.fullName}}
                 </ion-card-title>
                 <div class="mt-2">
-                  <span class="size-font"
+                  <!-- <span class="size-font"
                     *ngIf="listItem.age || listItem.height || listItem.weight ">{{listItem.age}},{{listItem.heightInFeet}},{{listItem.weight}}
-                    lb </span>
+                    lb </span> -->
+                    <ion-row style="width: 100%;">
+                      <ion-col size="4" *ngIf="listItem.age" style="padding: 0px;"><span class="size-font">{{listItem.age}}Yrs,</span></ion-col>
+                      <ion-col size="3" *ngIf="listItem.height" style="padding: 0px;"><span class="size-font">{{listItem.heightInFeet}},</span></ion-col>
+                      <ion-col size="3" *ngIf="listItem.weight" style="padding: 0px;"><span class="size-font">{{listItem.weight}}lb</span></ion-col>
+                      <ion-col size="2"></ion-col>
+                    </ion-row>
 
                 </div>
                 <div>

@@ -1142,12 +1142,12 @@
 			</div>
 		</div>
 		<div *ngIf="showTab == 'additionalPhotoTab'">
-			<div class="form-group row">
-				<ion-row style="width: 100%;margin-top: 100px;">
-					<ion-col *ngFor="let img of usersImages" size="4" style="height: 90px;padding: 5px;">
+			<div class="row">
+				<ion-row style="width: 100%;margin-top: 40px;">
+					<ion-col *ngFor="let img of usersImages" size="4" >
 						<div style="position: absolute; height:90px ; width:100%;margin: auto;">
-							<img  src={{img.image}} class="rounded float-left"
-						      alt="Upload additional Image" style="width:100%; height:90px">
+							<img  src={{img.image}} class="addimg"
+						      alt="Upload additional Image">
 						</div>
 					    <ion-buttons style="position: relative; margin-top: 0px; margin-left: 90px;" (click)="deleteAdditionalImages(img.imageId)">
 							<ion-button>
