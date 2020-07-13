@@ -41,6 +41,10 @@ export class FavouriteComponent implements OnInit {
   }
   address =[]
   relatedDetail : any =[]
+  noFavouriteFound: number = 0;
+  paginationDiv:false;
+  isLoggedIn: string;
+
   constructor(private modal: ModalController,
     private userService: UserService,
     private signinService: SignInService,
@@ -48,9 +52,16 @@ export class FavouriteComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.isLoggedIn = localStorage.getItem("isLoggedin");
     this.userDetails = this.signinService.getAuthData();
     this.usersId = this.userDetails.usersId;
+    this.userService.favouriteList(this.usersId, this.searchData).subscribe((response) => {
+      this.myFavoritesArray = response.data.favourites;
+      this.address = response.data.favourites.relatedDetails.usersAddress[0]
+    })
     this.onsearch(this.searchData)
+
+    
 
   }
   async search() {
@@ -71,6 +82,8 @@ export class FavouriteComponent implements OnInit {
   onsearch(searchData) {
     this.userService.favouriteList(this.usersId, this.searchData).subscribe((response) => {
       this.myFavoritesArray = response.data.favourites;
+      this.noFavouriteFound = 0;
+      if (this.myFavoritesArray.length == 0) { this.noFavouriteFound = 1; }
       // if(this.myFavoritesArray.length == 0){
       //   console.log("Data Not Found")
       //   this.utility.showToast("Data Not Found")
@@ -83,6 +96,8 @@ export class FavouriteComponent implements OnInit {
       //   currentPage: 1,
       //   totalItems: this.totalRowCount
       // };
+    }, error => {
+      this.noFavouriteFound = 1;
     })
   }
   gigType(gigType) {

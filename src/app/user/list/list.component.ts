@@ -208,24 +208,40 @@ export class ListComponent implements OnInit {
         this.userService.searchUsers(searchForm, this.usersId).subscribe(response => {
           let searchResponse = response.data;
           this.listDetails = searchResponse.users;
+          this.noTalentFound = 0;
+          if (this.listDetails.length == 0) { this.noTalentFound = 1; }
+        },error => {
+          this.noTalentFound = 1;
         })
         break;
       case 'crew':
         this.userService.searchCrew(searchForm, this.usersId).subscribe(response => {
           let searchResponse = response.data;
           this.listDetails = searchResponse.users;
+          this.noTalentFound = 0;
+          if (this.listDetails.length == 0) { this.noTalentFound = 1; }
+        },error => {
+          this.noTalentFound = 1;
         })
         break;
       case 'producer':
         this.userService.searchProducer(searchForm, this.usersId).subscribe(response => {
           let searchResponse = response.data;
           this.listDetails = searchResponse.users;
+          this.noTalentFound = 0;
+          if (this.listDetails.length == 0) { this.noTalentFound = 1; }
+        },error => {
+          this.noTalentFound = 1;
         })
         break;
       case 'vendor':
         this.userService.searchUsers(searchForm, this.usersId).subscribe(response => {
           let searchResponse = response.data;
           this.listDetails = searchResponse.users;
+          this.noTalentFound = 0;
+          if (this.listDetails.length == 0) { this.noTalentFound = 1; }
+        },error => {
+          this.noTalentFound = 1;
         })
         break;
     }
@@ -271,41 +287,5 @@ export class ListComponent implements OnInit {
     }
   }
 
-  // async showmsgicon() {
-  //   let alert = this.alert.create({
-  //     header: ,
-  //     message: messageText,
-  //     buttons: [
-  //       {
-  //         text: 'No',
-  //         role: 'cancel',
-  //         handler: () => {
-  //         }
-  //       },
-  //       {
-  //         text: 'Yes',
-  //         handler: () => {
-  //           this.gigsService.gigApplicationAcceptDecline(this.usersId, this.gigId, this.action)
-  //             .subscribe(
-  //               data => {
-  //                 this.apiResponse = data;
-  //                 this.isGigApplicationAcceptDecline = this.apiResponse.data.isDone;
-  //                 if (action == 'decline') {
-  //                   this.gigsProfileInfo.applications[index].status = 3;
-  //                 }
-  //                 if (action == 'accept') {
-  //                   this.actionName = 'selected';
-  //                   this.gigsProfileInfo.applications[index].status = 2;
-  //                 }
-
-  //               },
-  //               error => {
-  //                 this.isGigApplicationAcceptDecline = 0;
-  //               });
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   await (await alert).present()
-  // }
+  
 }

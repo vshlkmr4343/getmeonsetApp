@@ -38,9 +38,9 @@
                     lb </span> -->
                     <ion-row style="width: 100%;">
                       <ion-col size="4" *ngIf="listItem.age" style="padding: 0px;"><span class="size-font">{{listItem.age}}Yrs,</span></ion-col>
-                      <ion-col size="3" *ngIf="listItem.height" style="padding: 0px;"><span class="size-font">{{listItem.heightInFeet}},</span></ion-col>
+                      <ion-col size="4" *ngIf="listItem.height" style="padding: 0px;"><span class="size-font">{{listItem.heightInFeet}},</span></ion-col>
                       <ion-col size="3" *ngIf="listItem.weight" style="padding: 0px;"><span class="size-font">{{listItem.weight}}lb</span></ion-col>
-                      <ion-col size="2"></ion-col>
+                      <ion-col size="1"></ion-col>
                     </ion-row>
 
                 </div>
@@ -102,7 +102,7 @@
     </ion-row>
     <ion-row style="width: 100%;" *ngIf="noTalentFound == 1">
 			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
-				No result found.
+				No results found.
 			</div>
 		</ion-row>
   </div>

@@ -1,20 +1,25 @@
-<div class="modal-dialog" >
-  <div class="modal-content" >
+<div class="modal-dialog">
+  <div class="modal-content">
     <div class="modal-header text-center d-block border-0">
       <h5 class="modal-title w-100">Report to admin</h5>
-      <button #btnClose  type="button" class="close gmos-modal-close" data-dismiss="modal" aria-label="Close" (click)="close()"> <span aria-hidden="true">&times;</span> </button>
+      <button #btnClose type="button" class="close gmos-modal-close" data-dismiss="modal" aria-label="Close"
+        (click)="close()"> <span aria-hidden="true">&times;</span> </button>
     </div>
     <div class="modal-body p-4">
       <form [formGroup]="reportToAdminForm" (submit)="sendReportToAdmin()">
-            <div class="form-group">
-                <label for="">Please describe the reason</label>
-                <textarea class="form-control" formControlName="disputText" [ngClass]="{ 'is-invalid': reportToAdminSubmitted && m.disputText.errors}" >{{disputText}}</textarea>
-                <div *ngIf="reportToAdminSubmitted && m.disputText.errors" class="invalid-feedback">
-                  <div *ngIf="m.disputText.errors.required"> Required</div>
-                </div>
-              </div>
+        <div class="form-group">
+          <label for="">Please describe the reason</label>
+          <textarea class="form-control" formControlName="disputText"
+            [ngClass]="{ 'is-invalid': reportToAdminSubmitted && m.disputText.errors}">{{disputText}}</textarea>
+          <div *ngIf="reportToAdminSubmitted && m.disputText.errors" class="invalid-feedback">
+            <div *ngIf="m.disputText.errors.required"> Required</div>
+          </div>
+        </div>
         <button type="submit" class="btn btn-primary shadow-sm float-right">SEND</button>
       </form>
+      <!-- <ion-button class="btn" fill="outline" (click)="sendReportToAdmin()" color="dark">
+        SEND
+      </ion-button> -->
     </div>
   </div>
 </div>

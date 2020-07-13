@@ -53,9 +53,9 @@
               routerLink="/user/producer/display/{{favorite.relatedDetails.usersId}}" class="stretched-link"></a>
             <a *ngIf="favorite.relatedDetails.usersTypeId[0] == 6"
               routerLink="/user/vendor/display/{{favorite.relatedDetails.usersId}}" class="stretched-link"></a>
-            <p class="box-title size-font" *ngIf="favorite.moduleId == 1">{{favorite.relatedDetails.fullName}}</p>
-            <p class="box-heading size-font" *ngIf="favorite.moduleId == 1">
-              {{favorite.relatedDetails.usersAddress[0].fullAddress}}</p>
+            <p class="box-title size-font" *ngIf="favorite.moduleId == 2">{{favorite.relatedDetails.fullName}}</p>
+            <p class="box-heading size-font" *ngIf="favorite.moduleId == 2">
+              {{address.fullAddress}}</p>
           </ion-col>
           <ion-col size="3">
             <p class="box-heading size-font" *ngIf="favorite.moduleId == 2">{{gigType(favorite.relatedDetails.gigType)}}
@@ -75,13 +75,29 @@
       </ion-item>
     </div>
    
-      <div *ngIf='myFavoritesArray.length === 0' class="alert alert-danger alert-dismissible fade show" role="alert">
-        No result found.
-      </div>
+    <ion-row style="width: 100%;" *ngIf="noFavouriteFound == 1">
+			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+				No favourite found.
+			</div>
+		</ion-row>
    
   </div>
-  <div style="padding-top: 12px; padding-bottom: 0;">
+  <!-- <div style="padding-top: 12px; padding-bottom: 0;">
     <pagination-controls class="my-pagination" (pageChange)="pageChange($event)">
     </pagination-controls>
+  </div> -->
+  <div style="padding-top: 12px ;  padding-bottom: 0px;">
+    <div *ngIf="!isLoggedIn" [ngClass]="{'paginationDiv': true}">
+      <div *ngIf="myFavoritesArray.length > 0">
+        <pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
+        </pagination-controls>
+      </div>
+    </div>
+    <div *ngIf="isLoggedIn" [ngClass]="{'paginationDiv': false}">
+      <div *ngIf="myFavoritesArray.length > 0">
+        <pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
+        </pagination-controls>
+      </div>
+    </div>
   </div>
 </ion-content>
