@@ -29,7 +29,8 @@
 			<div class="card-body" style="background: #f5f5f5;">
 				<div class="row">
 					<div class="col-lg-6 size-font" *ngIf="gigsProfileInfo">
-						Gig Type: {{typeName}}
+						<div *ngIf="gigsProfileInfo.gigType == 1">Gig Type: Crew</div>
+						<div *ngIf="gigsProfileInfo.gigType == 2">Gig Type: Talent</div>
 						<div *ngIf="gigsProfileInfo.type">Type: {{gigsProfileInfo.type}}</div>
 						<div *ngIf="gigsProfileInfo.location.formattedAddressCustom">Location of shoot:
 							{{gigsProfileInfo.location.formattedAddressCustom}}</div>
