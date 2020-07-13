@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class ListComponent implements OnInit {
   isHighlited: any;
   type = 'Crew';
-  gigsDetails:any = [];
+  gigsDetails = [];
   usersId: any;
   gigType: number;
   gigUnion = 2;
@@ -30,6 +30,7 @@ export class ListComponent implements OnInit {
     limit: this.limit,
     start: this.start,
   }
+  noGigFound: number = 0;
   constructor(
     private menuCtrl: MenuController,
     private storage: Storage,
@@ -45,7 +46,6 @@ export class ListComponent implements OnInit {
     this.isHighlited = 'Talent'
     this.route.paramMap.subscribe((paramMap) => {
       if (paramMap.has('type')) {
-        console.log('Type:',paramMap.get('type'));
         this.type = paramMap.get('type');
         this.isHighlited = this.type;
       }
@@ -76,6 +76,11 @@ export class ListComponent implements OnInit {
         this.gigsService.getAllGigs().subscribe(response => {
           let gigsResponse = response.data
           this.gigsDetails = gigsResponse.gigs;
+          this.noGigFound = 0;
+          if (this.gigsDetails.length == 0) { this.noGigFound = 1; }
+        },
+        error => {
+          this.noGigFound = 1;
         })
         break;
       default:
@@ -84,6 +89,8 @@ export class ListComponent implements OnInit {
             response => {
               this.gigsDetails = response.data.gigs;
                this.totalRowCount = response.data.totalRow;
+               this.noGigFound = 0;
+               if (this.gigsDetails.length == 0) { this.noGigFound = 1; }
                this.config = {
                 itemsPerPage: this.limit,
                 currentPage: 1,
@@ -91,7 +98,7 @@ export class ListComponent implements OnInit {
               };
             },
             error => {
-              //this.noGigFound = 1;
+              this.noGigFound = 1;
             });
         break;
     }
@@ -114,7 +121,6 @@ export class ListComponent implements OnInit {
     modal.onDidDismiss()
       .then((filterFormData) => {
         if(filterFormData.data){
-          console.log('filterFormData:',filterFormData.data);
          // this.onSearch(filterFormData.data);
          if(filterFormData.data.gigType == 1){
            this.isHighlited = 'Crew';
@@ -132,13 +138,17 @@ export class ListComponent implements OnInit {
     this.gigsService.searchUsers(filterFormData, this.usersId).subscribe(response => {
       let gigsResponse = response.data
       this.gigsDetails = gigsResponse.gigs;
+      this.noGigFound = 0;
+      if (this.gigsDetails.length == 0) { this.noGigFound = 1; }
       this.config.totalItems = response.data.gigs.length;
+    },
+    error => {
+      this.noGigFound = 1;
     })
   }
 
   highlight(item) {
     this.isHighlited = item;
-    console.log('item',item);
     if (item == 'Crew') {
       this.type = 'Crew';
       this.fetchData('');

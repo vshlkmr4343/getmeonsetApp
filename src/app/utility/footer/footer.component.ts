@@ -8,7 +8,6 @@ export class FooterComponent implements OnInit {
   @Input()  isLoggedIn;
   constructor() { }
   ngOnInit() {
-   console.log('isLoggedIn',this.isLoggedIn);
   }
 
 }
