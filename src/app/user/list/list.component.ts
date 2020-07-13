@@ -9,6 +9,8 @@ import { SearchUserComponent } from 'src/app/search/search-user/search-user.comp
 import { SearchProducerComponent } from 'src/app/search/search-producer/search-producer.component';
 import { SearchVendorComponent } from 'src/app/search/search-vendor/search-vendor.component';
 import { UtilityService } from 'src/app/utility/utility.service';
+import { Platform, AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -20,7 +22,7 @@ export class ListComponent implements OnInit {
   userDetails: { isLoggedin: string; sudoLoggedin: string; currentUser: string; email: string; usersId: string; id: string; fullName: string; adminusersId: string; profileComplitted: string; };
   usersId: string;
   isLoggedIn: string;
-  listDetails: any;
+  listDetails: any = [];
   config = {
     itemsPerPage: 10,
     currentPage: 1,
@@ -33,7 +35,10 @@ export class ListComponent implements OnInit {
     limit: this.limit,
     start: this.start,
   }
+  paginationDiv:false;
   constructor(
+    private platform: Platform,
+    private alert: AlertController,
     private utilityService: UtilityService,
     private modalController: ModalController,
     private userService: UserService,
@@ -44,9 +49,9 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap) => {
       if (paramMap.has('type')) {
-       if(!this.userType){
-        this.userType = paramMap.get('type');
-       }
+        if (!this.userType) {
+          this.userType = paramMap.get('type');
+        }
       }
     })
     this.signinService.getAuthStatusListener()
@@ -235,4 +240,53 @@ export class ListComponent implements OnInit {
         })
     }
   }
+
+  // [routerLink]="['/messages/gigchat/',listItem.usersId]"
+  showMsg(userId) {
+    this.usersId = userId
+    if (this.isLoggedIn) {
+      this.router.navigateByUrl('/messages/gigchat/' + this.usersId)
+    }
+    else {
+      this.utilityService.showToast("Please Login to message this person")
+    }
+  }
+
+  // async showmsgicon() {
+  //   let alert = this.alert.create({
+  //     header: ,
+  //     message: messageText,
+  //     buttons: [
+  //       {
+  //         text: 'No',
+  //         role: 'cancel',
+  //         handler: () => {
+  //         }
+  //       },
+  //       {
+  //         text: 'Yes',
+  //         handler: () => {
+  //           this.gigsService.gigApplicationAcceptDecline(this.usersId, this.gigId, this.action)
+  //             .subscribe(
+  //               data => {
+  //                 this.apiResponse = data;
+  //                 this.isGigApplicationAcceptDecline = this.apiResponse.data.isDone;
+  //                 if (action == 'decline') {
+  //                   this.gigsProfileInfo.applications[index].status = 3;
+  //                 }
+  //                 if (action == 'accept') {
+  //                   this.actionName = 'selected';
+  //                   this.gigsProfileInfo.applications[index].status = 2;
+  //                 }
+
+  //               },
+  //               error => {
+  //                 this.isGigApplicationAcceptDecline = 0;
+  //               });
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   await (await alert).present()
+  // }
 }
