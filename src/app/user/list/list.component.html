@@ -94,11 +94,15 @@
         </div>
       </ion-col>
     </ion-row>
+    <ion-row style="width: 100%;" *ngIf="noTalentFound == 1">
+			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+				No result found.
+			</div>
+		</ion-row>
   </div>
  
   <div style="padding-top: 12px ;  padding-bottom: 0px;">
     <div *ngIf="!isLoggedIn" [ngClass]="{'paginationDiv': true}">
-
       <div *ngIf="listDetails.length > 0">
         <pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
         </pagination-controls>

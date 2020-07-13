@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityService } from 'src/app/utility/utility.service';
 import { GigsService } from '../gigs.service';
 import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -31,6 +32,9 @@ export class ListComponent implements OnInit {
     start: this.start,
   }
   noGigFound: number = 0;
+  paginationDiv:false;
+  isLoggedIn:any ;
+
   constructor(
     private menuCtrl: MenuController,
     private storage: Storage,
@@ -50,6 +54,8 @@ export class ListComponent implements OnInit {
         this.isHighlited = this.type;
       }
     })
+
+    this.isLoggedIn = localStorage.getItem("isLoggedin");
     this.storage.get('userData').then(data => {
       if (data) {
         this.usersId = data.usersId;

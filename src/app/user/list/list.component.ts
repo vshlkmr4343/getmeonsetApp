@@ -36,6 +36,8 @@ export class ListComponent implements OnInit {
     start: this.start,
   }
   paginationDiv:false;
+  noTalentFound: number = 0;
+
   constructor(
     private platform: Platform,
     private alert: AlertController,
@@ -103,11 +105,16 @@ export class ListComponent implements OnInit {
           .subscribe(response => {
             this.listDetails = response
             this.listDetails = this.listDetails.data.talents;
+            this.noTalentFound = 0;
+            if (this.listDetails.length == 0) { this.noTalentFound = 1; }
             this.config = {
               itemsPerPage: this.limit,
               currentPage: 1,
               totalItems: this.totalRowCount
             };
+          }, 
+          error => {
+            this.noTalentFound = 1;
           })
         break;
       case 'crew':
@@ -115,11 +122,15 @@ export class ListComponent implements OnInit {
           .subscribe(response => {
             this.listDetails = response
             this.listDetails = this.listDetails.data.crews;
+            this.noTalentFound = 0;
+            if (this.listDetails.length == 0) { this.noTalentFound = 1; }
             this.config = {
               itemsPerPage: this.limit,
               currentPage: 1,
               totalItems: this.totalRowCount
             };
+          },error => {
+            this.noTalentFound = 1;
           })
         break;
       case 'producer':
@@ -127,11 +138,15 @@ export class ListComponent implements OnInit {
           .subscribe(response => {
             this.listDetails = response
             this.listDetails = this.listDetails.data.crews;
+            this.noTalentFound = 0;
+            if (this.listDetails.length == 0) { this.noTalentFound = 1; }
             this.config = {
               itemsPerPage: this.limit,
               currentPage: 1,
               totalItems: this.totalRowCount
             };
+          },error => {
+            this.noTalentFound = 1;
           })
         break;
       case 'vendor':
@@ -139,11 +154,15 @@ export class ListComponent implements OnInit {
           .subscribe(response => {
             this.listDetails = response
             this.listDetails = this.listDetails.data.vendors;
+            this.noTalentFound = 0;
+            if (this.listDetails.length == 0) { this.noTalentFound = 1; }
             this.config = {
               itemsPerPage: this.limit,
               currentPage: 1,
               totalItems: this.totalRowCount
             };
+          },error => {
+            this.noTalentFound = 1;
           })
         break;
     }

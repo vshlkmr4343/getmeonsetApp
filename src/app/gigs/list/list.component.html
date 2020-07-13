@@ -73,9 +73,25 @@
 			</div>
 		</ion-row>
 	</div>
-	<div style="padding-top: 12px; padding-bottom: 0;" *ngIf="gigsDetails.length > 0">
+	<!-- <div style="padding-top: 12px; padding-bottom: 0;" *ngIf="gigsDetails.length > 0">
 		<pagination-controls class="my-pagination" (pageChange)="pageChange($event)">
 		</pagination-controls>
-	</div>
+	</div> -->
+
+
+	<div style="padding-top: 12px ;  padding-bottom: 0px;">
+		<div *ngIf="!isLoggedIn" [ngClass]="{'paginationDiv': true}">
+		  <div *ngIf="gigsDetails.length > 0">
+			<pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
+			</pagination-controls>
+		  </div>
+		</div>
+		<div *ngIf="isLoggedIn" [ngClass]="{'paginationDiv': false}">
+		  <div *ngIf="gigsDetails.length > 0">
+			<pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
+			</pagination-controls>
+		  </div>
+		</div>
+	  </div>
 </ion-content>
 <app-footer [isLoggedIn]="usersId"></app-footer>
