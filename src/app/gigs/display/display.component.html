@@ -3,23 +3,24 @@
 	<div>
 		<ion-item class="fixed-heading" *ngIf="gigsProfileInfo" lines="none">
 			<ion-row style="width: 100%;">
-				<ion-col size="5">
+				<ion-col size="8">
 					<div class="card-title bold-font  " style="margin-bottom: 0px;">{{gigsProfileInfo.title}}</div>
 				</ion-col>
-				<ion-col size="2">
+				
+				<ion-col *ngIf="isProducer" size="1" [routerLink]="['/gigs/'+typeName+'/edit', gigId, gigsType]">
+					<span>
+						<i class="fas fa-edit  text-secondary"></i>
+					</span>
+				</ion-col>
+				<ion-col size="1">
 					<span *ngIf="isLoggedIn" (click)="favorite()">
 						<i *ngIf="!isFavorite" class="far fa-heart fa-1x ml-3  text-secondary"></i>
 						<i *ngIf="isFavorite" class="fas fa-heart fa-1x ml-3  text-danger"></i>
 					</span>
 				</ion-col>
-				<ion-col size="2" (click)="share()">
+				<ion-col size="1" (click)="share()">
 					<span>
 						<i class="fas fa-share-alt fa-1x ml-3 text-secondary"></i>
-					</span>
-				</ion-col>
-				<ion-col *ngIf="isProducer" size="2" [routerLink]="['/gigs/'+typeName+'/edit', gigId, gigsType]">
-					<span>
-						<i class="fas fa-edit  text-secondary"></i>
 					</span>
 				</ion-col>
 			</ion-row>
@@ -121,7 +122,7 @@
 											class="size-font">{{gigsProfileInfo.producerInfo?.fullName}}</span>
 									</div>
 									<bar-rating [(rate)]="rate" [max]="5" (rateChange)="addRating()"
-										[readOnly]="!isproducer"></bar-rating>
+										[readOnly]="usersId == this.gigsProfileInfo.producerId"></bar-rating>
 
 								</div>
 							</ion-item>

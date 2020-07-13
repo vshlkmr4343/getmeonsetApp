@@ -67,13 +67,15 @@
 				</ion-row>
 			</ion-col>
 		</ion-row>
+		<ion-row style="width: 100%;" *ngIf="noGigFound == 1">
+			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+				No result found.
+			</div>
+		</ion-row>
 	</div>
-	<div style="padding-top: 12px; padding-bottom: 0;">
+	<div style="padding-top: 12px; padding-bottom: 0;" *ngIf="gigsDetails.length > 0">
 		<pagination-controls class="my-pagination" (pageChange)="pageChange($event)">
 		</pagination-controls>
-	</div>
-	<div *ngIf='noGigFound == 1' class="alert alert-danger alert-dismissible fade show" role="alert">
-		No result found.
 	</div>
 </ion-content>
 <app-footer [isLoggedIn]="usersId"></app-footer>
