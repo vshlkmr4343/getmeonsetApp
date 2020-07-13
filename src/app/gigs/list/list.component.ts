@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityService } from 'src/app/utility/utility.service';
 import { GigsService } from '../gigs.service';
 import { Storage } from '@ionic/storage';
-
+import { FormGroup, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -34,8 +34,10 @@ export class ListComponent implements OnInit {
   noGigFound: number = 0;
   paginationDiv:false;
   isLoggedIn:any ;
+  searchForm: any;
 
   constructor(
+    public formBuilder: FormBuilder,
     private menuCtrl: MenuController,
     private storage: Storage,
     private utiliy: UtilityService,
@@ -62,6 +64,18 @@ export class ListComponent implements OnInit {
       }
       this.fetchData('', this.type)
     })
+
+    this.searchForm = this.formBuilder.group({
+      gigType: this.gigType,
+      gigUnion: ['2'],
+      gigPayment: ['2'],
+      radius: ['101'],
+      race: [''],
+      physicalCharacteristics: [''],
+      cityState: '',
+      fullName: '',
+      positionsAvailable: [] ,
+    });
 
   }
   getGigType() {
@@ -113,7 +127,7 @@ export class ListComponent implements OnInit {
   pageChange(newPage: number) {
     this.config.currentPage=newPage;
     this.start = (newPage-1) * this.limit;
-   // this.onSearch();
+    this.onSearch(this.searchForm.value);
   }
   async search() {
     const modal = await this.modalController.create({
