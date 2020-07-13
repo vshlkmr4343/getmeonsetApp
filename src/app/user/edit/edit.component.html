@@ -4,18 +4,18 @@
 		<ion-row style="width: 100%;">
 			<ion-col class="tabItem" size="3" [ngClass]="{'highlightedTab': showTab === 'editTab'}"
 				(click)="changeTab('editTab')">
-				<span>Basic info</span>
+				<img src="assets/images/basic_info.svg">
 			</ion-col>
 			<ion-col class="tabItem" size="3" [ngClass]="{'highlightedTab': showTab === 'additionalPhotoTab'}"
 				(click)="changeTab('additionalPhotoTab')">
-				<span>Additional Photos</span>
+				<img src="assets/images/additional_photos.svg">
 			</ion-col>
 			<ion-col class="tabItem" size="3" (click)="changeTab('notificationTab')"
 				[ngClass]="{'highlightedTab': showTab === 'notificationTab'}">
-				<span>Email Notification</span>
+				<img src="assets/images/email_notification.svg">
 			</ion-col>
 			<ion-col class="tabItem" size="3" [ngClass]="{'highlightedTab': showTab === 'profileTab'}" [routerLink]="['/user/display',usersId,usersType]">
-				<span>View Profile</span>
+				<img src="assets/images/view_profile.svg">
 			</ion-col>
 		</ion-row>
 	</div>
