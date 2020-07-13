@@ -1143,17 +1143,33 @@
 		</div>
 		<div *ngIf="showTab == 'additionalPhotoTab'">
 			<div class="row">
-				<ion-row style="width: 100%;margin-top: 40px;">
+				<ion-row style="width: 100%;margin-top: 40px; height: 90px;">
 					<ion-col *ngFor="let img of usersImages" size="4" >
-						<div style="position: absolute; height:90px ; width:100%;margin: auto;">
-							<img  src={{img.image}} class="addimg"
+						<div style="position: relative; height:90px ; width:100%;margin: auto;">
+							<img  src={{img.image}} class="addimg p-0"
 						      alt="Upload additional Image">
 						</div>
-					    <ion-buttons style="position: relative; margin-top: 0px; margin-left: 90px;" (click)="deleteAdditionalImages(img.imageId)">
+					    <ion-buttons style="position: absolute; margin-top: 0px; margin-left: 80px; top:5px;right:10px;" (click)="deleteAdditionalImages(img.imageId)">
 							<ion-button>
 								<ion-icon name="trash-outline"></ion-icon>
 							</ion-button>
 						</ion-buttons>
+					</ion-col>
+				</ion-row>
+			</div>
+			<div class="clearfix"></div>
+			<div class="row">
+				<ion-row style="height: 90px;">
+					<ion-col  size="4" >
+						<div style="height:90px ; width:100%;margin: auto;" class="bg-white shadow-sm">
+							<img  src="assets/images/add-outline.svg" class="addimg"
+							  alt="Upload additional Image">
+						</div>
+						<!-- <ion-buttons style="position: relative; margin-top: 0px; margin-left: 90px;" (click)="deleteAdditionalImages(img.imageId)">
+							<ion-button>
+								<ion-icon name="trash-outline"></ion-icon>
+							</ion-button>
+						</ion-buttons> -->
 					</ion-col>
 				</ion-row>
 			</div>
