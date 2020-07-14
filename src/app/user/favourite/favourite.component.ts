@@ -44,7 +44,7 @@ export class FavouriteComponent implements OnInit {
   noFavouriteFound: number = 0;
   paginationDiv:false;
   isLoggedIn: string;
-
+userType=[]
   constructor(private modal: ModalController,
     private userService: UserService,
     private signinService: SignInService,
@@ -55,10 +55,11 @@ export class FavouriteComponent implements OnInit {
     this.isLoggedIn = localStorage.getItem("isLoggedin");
     this.userDetails = this.signinService.getAuthData();
     this.usersId = this.userDetails.usersId;
-    this.userService.favouriteList(this.usersId, this.searchData).subscribe((response) => {
-      this.myFavoritesArray = response.data.favourites;
-      this.address = response.data.favourites.relatedDetails.usersAddress[0]
-    })
+    // this.userService.favouriteList(this.usersId, this.searchData).subscribe((response) => {
+    //   this.myFavoritesArray = response.data.favourites;
+    //   this.address = response.data.favourites.relatedDetails.usersAddress[0]
+    //   this.userType = response.data.favourites.relatedDetails.usersTypeId[0]
+    // })
     this.onsearch(this.searchData)
 
     
@@ -82,6 +83,8 @@ export class FavouriteComponent implements OnInit {
   onsearch(searchData) {
     this.userService.favouriteList(this.usersId, this.searchData).subscribe((response) => {
       this.myFavoritesArray = response.data.favourites;
+      this.address = response.data.favourites.relatedDetails.usersAddress[0]
+      this.userType = response.data.favourites.relatedDetails.usersTypeId[0]
       this.noFavouriteFound = 0;
       if (this.myFavoritesArray.length == 0) { this.noFavouriteFound = 1; }
       // if(this.myFavoritesArray.length == 0){

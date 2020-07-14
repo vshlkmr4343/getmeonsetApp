@@ -2,14 +2,14 @@
 <ion-content>
 	<ion-item lines="full"  class="fixed-heading">
 		<ion-row style="width: 100%;">
-			<ion-col size="3">
+			<ion-col size="4" style="padding-top: 10px;">
 				<span>My Gigs</span>
 			</ion-col>
+			<ion-col size="2">
+			</ion-col>
 			<ion-col size="3">
 			</ion-col>
-			<ion-col size="4">
-			</ion-col>
-			<ion-col size="2">
+			<ion-col size="3">
 				<ion-button size="small" id="filterBtn" (click)="filter()">Filter</ion-button>
 			</ion-col>
 		</ion-row>
@@ -62,7 +62,13 @@
 				</ion-row>
 			</ion-col>
 		</ion-row>
-		<div style="padding-top: 12px; padding-bottom: 0"><pagination-controls class="ngx-pagination"
+		<ion-row style="width: 100%;" *ngIf="noMyGigFound == 1">
+			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+				No mygigs found.
+			</div>
+		</ion-row>
+		<div style="padding-top: 12px; padding-bottom: 0" *ngIf="myGigsArray.length > 0">
+			<pagination-controls class="ngx-pagination"
 			(pageChange)="pageChange($event)">
 		</pagination-controls></div>
 	</div>

@@ -16,7 +16,7 @@
     </ion-row>
   </ion-item>
   <div class="box h-100">
-    <ion-item lines="full">
+    <!-- <ion-item lines="full">
 
       <ion-row style="width: 100%;">
         <ion-col size="6">
@@ -28,9 +28,9 @@
           <p class="box-heading size-font"> Posted Date </p>
         </ion-col>
       </ion-row>
-    </ion-item>
+    </ion-item> -->
 
-    <div *ngIf='myFavoritesArray.length > 0'>
+    <!-- <div *ngIf='myFavoritesArray.length > 0'>
       
       <ion-item lines="full" *ngFor="let favorite of myFavoritesArray | paginate: config; let i = index">
         <ion-row style="width: 100%;">
@@ -53,8 +53,8 @@
               routerLink="/user/producer/display/{{favorite.relatedDetails.usersId}}" class="stretched-link"></a>
             <a *ngIf="favorite.relatedDetails.usersTypeId[0] == 6"
               routerLink="/user/vendor/display/{{favorite.relatedDetails.usersId}}" class="stretched-link"></a>
-            <p class="box-title size-font" *ngIf="favorite.moduleId == 2">{{favorite.relatedDetails.fullName}}</p>
-            <p class="box-heading size-font" *ngIf="favorite.moduleId == 2">
+            <p class="box-title size-font" *ngIf="favorite.moduleId == 1">{{favorite.relatedDetails.fullName}}</p>
+            <p class="box-heading size-font" *ngIf="favorite.moduleId == 1">
               {{address.fullAddress}}</p>
           </ion-col>
           <ion-col size="3">
@@ -73,8 +73,59 @@
           </ion-col>
         </ion-row>
       </ion-item>
-    </div>
+    </div> -->
    
+    
+    <ion-row style="width: 100%;" *ngIf='myFavoritesArray.length > 0'>
+			<ion-col size="6" *ngFor="let favorite of myFavoritesArray | paginate: config; let i = index" class="border">
+        <div>
+          <input type="checkbox" (change)="checkedSelected(favorite)" [(ngModel)]="favorite.selected"
+            id="customCheck{{i+1}}">
+        </div>
+				<div *ngIf="favorite.moduleId == 2"  [routerLink]="['/gigs/:type/display/', favorite.relatedDetails.gigId, favorite.relatedDetails.gigType]">
+					<p class="box-title size-font" *ngIf="favorite.moduleId == 2">{{favorite.relatedDetails.title}}</p>
+          <p class="box-heading size-font" *ngIf="favorite.moduleId == 2">{{favorite.relatedDetails.location.fullAddress}}</p>
+          <p class="box-heading size-font" *ngIf="favorite.moduleId == 1"> {{address.fullAddress}}</p>
+					<!-- <p class="box-heading size-font">Payments: {{favorite.payment}}</p>
+          <p class="box-heading size-font">Per diem provided: {{favorite.perDimeProvided}}</p> -->
+          <p class="box-heading size-font"  *ngIf="favorite.moduleId == 2">Type: {{gigType(favorite.relatedDetails.gigType)}}</p>
+          <p class="box-heading size-font" *ngIf="favorite.moduleId == 2">Posted Date: {{favorite.createdAt * 1000 | date:'dd/MM/yyyy'}}</p>
+          <p class="box-heading size-font" *ngIf="favorite.moduleId == 1">Posted Date: {{favorite.createdAt * 1000 | date:'dd/MM/yyyy'}}</p>
+				</div>
+				<!-- <ion-label class="box-heading size-font">Posted by:</ion-label> -->
+				<ion-row style="width: 100%;">
+					<ion-col size="2">
+						<!-- <ion-thumbnail>
+							<img src={{favorite.relatedDetails.producerInfo.profileImage}}>
+						</ion-thumbnail> -->
+					</ion-col>
+					<ion-col size="2"></ion-col>
+					<ion-col size="8" style="padding-left: 10px;" *ngIf="favorite.moduleId == 2">
+						<a *ngIf="userType == 3"
+            routerLink="/user/display/{{favorite.relatedDetails.usersId}}"  class="stretched-link">
+							<ion-label color="primary">{{favorite.relatedDetails.producerInfo.fullName}}
+							</ion-label>
+						</a>
+						<a *ngIf="userType == 4"
+            routerLink="/user/display/{{favorite.relatedDetails.usersId}}"  class="stretched-link">
+							<ion-label color="primary">{{favorite.relatedDetails.producerInfo.fullName}}
+							</ion-label>
+						</a>
+						<a *ngIf="userType == 5"
+            routerLink="/user/display/{{favorite.relatedDetails.usersId}}" class="stretched-link">
+							<ion-label color="primary">{{favorite.relatedDetails.producerInfo.fullName}}
+							</ion-label>
+						</a>
+						<a  *ngIf="userType == 6"
+            routerLink="/user/display/{{favorite.relatedDetails.usersId}}" class="stretched-link">
+							<ion-label color="primary">{{favorite.relatedDetails.producerInfo.fullName}}
+							</ion-label>
+						</a>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>
+    
     <ion-row style="width: 100%;" *ngIf="noFavouriteFound == 1">
 			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
 				No favourite found.
