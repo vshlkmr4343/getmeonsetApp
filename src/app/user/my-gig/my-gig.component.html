@@ -2,7 +2,7 @@
 <ion-content>
 	<ion-item lines="full"  class="fixed-heading">
 		<ion-row style="width: 100%;">
-			<ion-col size="3" style="padding-top: 10px;">
+			<ion-col size="3">
 				<span>My Gigs</span>
 			</ion-col>
 			<ion-col size="3">
@@ -62,28 +62,8 @@
 				</ion-row>
 			</ion-col>
 		</ion-row>
-		<ion-row style="width: 100%;" *ngIf="noMyGigFound == 1">
-			<div  class="alert alert-danger alert-dismissible fade show w-100" role="alert">
-				No mygigs found.
-			</div>
-		</ion-row>
-		<!-- <div style="padding-top: 12px; padding-bottom: 0"><pagination-controls class="ngx-pagination"
+		<div style="padding-top: 12px; padding-bottom: 0"><pagination-controls class="ngx-pagination"
 			(pageChange)="pageChange($event)">
-		</pagination-controls></div> -->
-
-		<div style="padding-top: 12px ;  padding-bottom: 0px;">
-			<div *ngIf="!isLoggedIn" [ngClass]="{'paginationDiv': true}">
-			  <div *ngIf="myGigsArray.length > 0">
-				<pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
-				</pagination-controls>
-			  </div>
-			</div>
-			<div *ngIf="isLoggedIn" [ngClass]="{'paginationDiv': false}">
-			  <div *ngIf="myGigsArray.length > 0">
-				<pagination-controls class="ngx-pagination" (pageChange)="pageChange($event)">
-				</pagination-controls>
-			  </div>
-			</div>
-		  </div>
+		</pagination-controls></div>
 	</div>
 </ion-content>

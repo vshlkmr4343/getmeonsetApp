@@ -4,13 +4,13 @@
 	</div>
 	<div class="login-btn">
 		<div>
-			<ion-button id="btn" expand="full" (click)="browse('Talent')">BROWSE AS ACTOR</ion-button>
+			<ion-button id="btn" expand="full" [routerLink]="['/gigs/Talent']">BROWSE AS ACTOR</ion-button>
 		</div>
 		<div>
-			<ion-button id="btn" expand="full" (click)="browse('Crew')">BROWSE AS CREW</ion-button>
+			<ion-button id="btn" expand="full" [routerLink]="['/gigs/Crew']">BROWSE AS CREW</ion-button>
 		</div>
 		<div>
-			<ion-button id="btn" expand="full" [routerLink]="['/user/list/producer']">BROWSE AS PRODUCER</ion-button>
+			<ion-button id="btn" expand="full" [routerLink]="['/user/list/talent']">BROWSE AS PRODUCER</ion-button>
 		</div>
 	</div>
 	<div style="position: absolute; background-color: transparent; bottom: 0px; width: 100%">
