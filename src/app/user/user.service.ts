@@ -595,4 +595,20 @@ export class UserService {
     };
     return this.utility.requestHttp(environment.API_URL + 'favourite/removeFromFavourite', data);
   }
+
+  uploadVideo(uploadData: any, id:any) {
+    const data = {        
+        video: uploadData,
+        usersId: id,
+        api_key: environment.API_KEY_VALUE,
+    };
+    return this.utility.requestHttp(environment.API_URL+'user/uploadVideo',(data));
+}
+getAllVideos(id:any) {
+  const data = {        
+      usersId: id,
+      api_key: environment.API_KEY_VALUE,
+  };
+  return this.utility.requestHttp(environment.API_URL+'user/getAllVideos',(data));
+}
 }

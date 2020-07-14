@@ -2,6 +2,11 @@
 <ion-content>
 	<div *ngIf="userProfileInfo">
 		<div><img class="profileimg" [src]="userProfileInfo.profileImage">
+			<div class="profile_col" *ngIf="profileVideo != null">
+				<video height="212"  class="profile_video w-100" controls disabled="true" #videoPlayer>
+				  <source [src]="profileVideo" type="video/mp4">
+				</video>
+			   </div>
 			<ion-row style="margin-top: 5px;">
 				<!-- <ion-col size="2">
 					<a *ngIf="userProfileInfo.email" href="mailto:{{userProfileInfo.email}}" target="_top" class="p-3"
@@ -206,24 +211,24 @@
 			<div class="col-lg-12 mt-4" *ngIf="userProfileInfo.usersTypeId.indexOf('6') != -1">
 				<h5 class="card-title">Vendor info</h5>
 				<div *ngIf="userProfileInfo.equipmentRentalDetails">
-					<span class="size-font"> Equipment Rentals: {{userProfileInfo.equipmentRentalDetails}} </span>
+					<span class="size-font"> Equipment Rentals : {{userProfileInfo.equipmentRentalDetails}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.accounting != ''">
-					<span class="size-font"> Accounting / Payroll: {{userProfileInfo.accounting == '1' ? 'Yes' : 'No'}}
+					<span class="size-font"> Accounting / Payroll : {{userProfileInfo.accounting == '1' ? 'Yes' : 'No'}}
 					</span>
 				</div>
 				<div *ngIf="userProfileInfo.audio != ''">
-					<span class="size-font"> Audio / Sound: {{userProfileInfo.audio == '1' ? 'Yes' : 'No'}} </span>
+					<span class="size-font"> Audio / Sound : {{userProfileInfo.audio == '1' ? 'Yes' : 'No'}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.catering != ''">
-					<span class="size-font"> Catering:{{userProfileInfo.catering == '1' ? 'Yes' : 'No'}} </span>
+					<span class="size-font"> Catering : {{userProfileInfo.catering == '1' ? 'Yes' : 'No'}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.distribution  != ''">
 					<span class="size-font"> Distribution : {{userProfileInfo.distribution == '1' ? 'Yes' : 'No'}}
 					</span>
 				</div>
 				<div *ngIf="userProfileInfo.insurance != ''">
-					<span class="size-font"> Insurance: {{userProfileInfo.insurance == '1' ? 'Yes' : 'No'}} </span>
+					<span class="size-font"> Insurance : {{userProfileInfo.insurance == '1' ? 'Yes' : 'No'}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.legal  != ''">
 					<span class="size-font"> Legal : {{userProfileInfo.legal == '1' ? 'Yes' : 'No'}} </span>
@@ -233,40 +238,37 @@
 					</span>
 				</div>
 				<div *ngIf="userProfileInfo.propsRental != ''">
-					<span class="size-font"> Props Rental & Supplies:
-						{{userProfileInfo.propsRental == '1' ? 'Yes' : 'No'}} </span>
+					<span class="size-font"> Props Rental & Supplies : {{userProfileInfo.propsRental == '1' ? 'Yes' : 'No'}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.security != ''">
-					<span class="size-font"> Security: {{userProfileInfo.security == '1' ? 'Yes' : 'No'}} </span>
+					<span class="size-font"> Security : {{userProfileInfo.security == '1' ? 'Yes' : 'No'}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.stagesStudios != ''" class="m-0">
-					<span class="size-font"> Stages & Studios: {{userProfileInfo.stagesStudios == '1' ? 'Yes' : 'No'}}
+					<span class="size-font"> Stages & Studios : {{userProfileInfo.stagesStudios == '1' ? 'Yes' : 'No'}}
 					</span>
 				</div>
 				<div *ngIf="userProfileInfo.talentCasting != ''">
-					<span class="size-font"> Talent / Casting: {{userProfileInfo.talentCasting == '1' ? 'Yes' : 'No'}}
+					<span class="size-font"> Talent / Casting : {{userProfileInfo.talentCasting == '1' ? 'Yes' : 'No'}}
 					</span>
 				</div>
 				<div *ngIf="userProfileInfo.transportation != ''">
-					<span class="size-font"> Transportation: {{userProfileInfo.transportation == '1' ? 'Yes' : 'No'}}
+					<span class="size-font"> Transportation : {{userProfileInfo.transportation == '1' ? 'Yes' : 'No'}}
 					</span>
 				</div>
 				<div *ngIf="userProfileInfo.travelAccommodations != ''">
-					<span class="size-font"> Travel / Accommodations:
-						{{userProfileInfo.travelAccommodations == '1' ? 'Yes' : 'No'}} </span>
+					<span class="size-font"> Travel / Accommodations : {{userProfileInfo.travelAccommodations == '1' ? 'Yes' : 'No'}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.wardrobeCostumes != ''">
-					<span class="size-font"> Wardrobe / Costumes:
-						{{userProfileInfo.wardrobeCostumes == '1' ? 'Yes' : 'No'}} </span>
+					<span class="size-font"> Wardrobe / Costumes : {{userProfileInfo.wardrobeCostumes == '1' ? 'Yes' : 'No'}} </span>
 				</div>
 			</div>
 			<div class="col-lg-12 mt-4" *ngIf="userProfileInfo.usersTypeId.indexOf('5') != -1">
 				<h5 class="card-title">Crew info</h5>
 				<div *ngIf="userProfileInfo.jobInterestedInDetails">
-					<span class="size-font">Job interested in: {{userProfileInfo.jobInterestedInDetails}} </span>
+					<span class="size-font">Job interested in : {{userProfileInfo.jobInterestedInDetails}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.experiencedInDetails">
-					<span class="size-font">Experienced in: {{userProfileInfo.experiencedInDetails}} </span>
+					<span class="size-font">Experienced in : {{userProfileInfo.experiencedInDetails}} </span>
 				</div>
 				<div *ngIf="userProfileInfo.equipmentOwned">
 					<span class="size-font">Equipment Owned : {{userProfileInfo.equipmentOwnedText}} </span>
@@ -284,10 +286,10 @@
 					<span class="size-font">Tattoos : {{tattoos}}</span>
 				</div>
 				<div *ngIf="userProfileInfo.willingToTravelDetails">
-					<span class="size-font">Willing To Travel?: {{userProfileInfo.willingToTravelDetails}}</span>
+					<span class="size-font">Willing To Travel? : {{userProfileInfo.willingToTravelDetails}}</span>
 				</div>
 				<div *ngIf="userProfileInfo.unionDetails">
-					<span class="size-font">Union?:{{userProfileInfo.unionDetails}}</span>
+					<span class="size-font">Union? : {{userProfileInfo.unionDetails}}</span>
 				</div>
 				<div *ngIf="userProfileInfo.race">
 					<span class="size-font">Race : {{userProfileInfo.race | titlecase}} </span>

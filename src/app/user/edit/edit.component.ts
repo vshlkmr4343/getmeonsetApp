@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild ,ElementRef} from '@angular/core';
 import { UtilityService } from 'src/app/utility/utility.service';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -37,6 +37,7 @@ interface FileReaderEvent extends Event {
 })
 
 export class EditComponent implements OnInit {
+  @ViewChild('videoPlayer', {static:true}) videoplayer: ElementRef;
   private id: string;
   merge: Observable<any>;
   editform: FormGroup;
@@ -99,6 +100,11 @@ export class EditComponent implements OnInit {
   otpEmail: any;
   accountTypeId: any;
   uploadedFile: any;
+  url: any ;
+  myFiles: any = [];
+  userVideos: any = [] ;
+  loading:boolean = false
+  loadVideo:boolean = false
   raceArray = RACE_ARRAY;
   physicalCharacteristicsArray = PHYSICAL_CHARACTERISTICS_ARRAY;
   equipmentOwnedArray = [
@@ -339,6 +345,8 @@ export class EditComponent implements OnInit {
     }
 
     this.getEmailNotificationSettings()
+    localStorage.removeItem("profileVideo");
+    this.getAllVideos() ;
   }
 
   public selectUnionData() {
@@ -1220,5 +1228,52 @@ export class EditComponent implements OnInit {
     //         this.myModal.hide();
     //     });
   }
+  getVideoDetails(e) {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      this.loadVideo = true
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        this.url = (<FileReader>event.target).result;
+        this.myFiles.push({
+          name : file.name ,
+          type : file.type ,
+          file : this.url
+        })
+        this.userService.uploadVideo(this.url, this.id)
+        .subscribe(
+            (res) => {
+                //console.log(res) ;
+                this.userVideos = res;
+                this.loadVideo = false
+                //this.usersImages = this.usersImages.data.image;
+                this.userVideos = this.userVideos.data.allVideos;
+                //console.log("===== User Video =======") ;
+                localStorage.removeItem("profileVideo");
+                localStorage.setItem('profileVideo', this.userVideos[0].video);
+                //console.log(this.userVideos) ;
+            },error=>{
+                this.loadVideo = false
 
+            });
+      }
+    }
+  }
+
+  getAllVideos(){
+    this.userService.getAllVideos(this.usersId)
+    .subscribe(
+    data => {
+        this.userVideos = data ;
+        this.userVideos = this.userVideos.data.videos ;
+        console.log(this.userVideos) ;
+        localStorage.setItem('profileVideo', this.userVideos[0].video);
+        console.log('=== Profile Video storeage ===') ;
+        console.log(localStorage.getItem('profileVideo')) 
+
+    },
+    error => {
+    });
+}
 }

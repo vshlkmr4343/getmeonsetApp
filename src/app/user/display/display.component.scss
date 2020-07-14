@@ -20,3 +20,32 @@
     height: 80px;
     object-fit: cover;
   }
+
+  @media (min-width:768px){
+    .photo-grid img{
+        max-width: 33.333333%;
+    }
+    .profile_col{
+        flex-basis: 0;
+        flex-grow: 1;
+        min-width: 0;
+        max-width: 100%;
+        padding: 15px;
+    }
+    video.profile_video {
+        height: 100%;
+    }
+    
+}
+@media (max-width:767px){
+    .profile_col{
+        position: relative;
+        width: 100%;
+        // padding-right: 15px;
+        // padding-left: 15px;
+    }
+    video.profile_video {
+        width: 100%;
+        margin-top: 20px;
+    }
+}

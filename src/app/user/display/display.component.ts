@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild , ElementRef} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UserService } from '../user.service';
 import { UtilityService } from 'src/app/utility/utility.service';
@@ -9,6 +9,8 @@ import { UtilityService } from 'src/app/utility/utility.service';
   styleUrls: ['./display.component.scss'],
 })
 export class DisplayComponent implements OnInit {
+  @ViewChild('videoPlayer',{static:true}) videoplayer: ElementRef;
+
   loggedInUsersId: string;
   usersId: string;
   userType: any;
@@ -44,11 +46,17 @@ export class DisplayComponent implements OnInit {
   usersRatingReasonText: string;
   messageReasonText: string;
   lastIdRating: any;
+  profileVideo: any = '' ;
+
   constructor(
     private utility: UtilityService,
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { 
+      this.profileVideo = localStorage.getItem('profileVideo');
+      console.log('=== Profile Video ===') ;
+              console.log(this.profileVideo) 
+    }
   ngOnInit() {
     this.loggedInUsersId = localStorage.getItem("usersId");
     this.isLoggedIn = localStorage.getItem("isLoggedin");
