@@ -13,6 +13,8 @@ import { Location } from '@angular/common'
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
+
+//test change
 export class AppComponent implements OnInit {
   public isLoggedIn = false;
   public previousLoggedInEvent = false;
